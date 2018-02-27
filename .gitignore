@@ -1,6 +1,6 @@
-manifest/cache/
-manifest/logs/
-manifest/tmp/
-symphony/
-workspace/uploads/
-install-log.txt
+.idea
+Thumbs.db
+.DS_Store
+.sass-cache
+vendor
+components
