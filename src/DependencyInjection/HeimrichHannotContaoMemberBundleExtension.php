@@ -1,12 +1,12 @@
 <?php
-/**
+
+/*
  * Copyright (c) 2018 Heimrich & Hannot GmbH
  *
  * @license LGPL-3.0-or-later
  */
 
 namespace HeimrichHannot\MemberBundle\DependencyInjection;
-
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -17,7 +17,7 @@ class HeimrichHannotContaoMemberBundleExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)
     {
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
     }
 }
