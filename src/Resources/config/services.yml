@@ -1,0 +1,19 @@
+services:
+  huh.member.entity.address:
+    class: HeimrichHannot\MemberBundle\Entity\MemberAddress
+    public: true
+    arguments:
+      - "@contao.framework"
+  huh.member.entity.member:
+    class: HeimrichHannot\MemberBundle\Entity\Member
+    public: true
+    arguments:
+      - "@contao.framework"
+  huh.member.choice.city:
+    class: HeimrichHannot\MemberBundle\Choice\CityChoice
+    public: true
+    arguments:
+      - "@contao.framework"
+  huh.member.hooks:
+    class: HeimrichHannot\MemberBundle\Backend\Hooks
+    public: true

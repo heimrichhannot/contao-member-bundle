@@ -1,0 +1,4 @@
+huh:
+  filter:
+    types:
+      - {name: memberCity, class: HeimrichHannot\MemberBundle\Filter\CityType, type: choice}
