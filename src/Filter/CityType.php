@@ -24,9 +24,9 @@ class CityType extends ChoiceType
     {
         $filter = $this->config->getFilter();
         $data = $this->config->getData();
-        $value = $data['city'];
 
-        if (null !== $value && '' !== $value) {
+        if (isset($data['city']) && null !== $data['city'] && '' !== $data['city']) {
+            $value = $data['city'];
             $alias = 'tl_member_address_'.$element->field;
             $tlMember = $filter['dataContainer'];
             $builder->where($tlMember.'.city= :cityValue');

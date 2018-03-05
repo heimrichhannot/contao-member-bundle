@@ -81,5 +81,16 @@ class HooksTest extends ContaoTestCase
         $this->assertSame('Dresden', $result['formatted']['city']);
         $this->assertSame('de', $result['formatted']['country']);
         $this->assertSame('Sachsen', $result['formatted']['state']);
+
+        $container = System::getContainer();
+
+        $entityAddressAdapter = $this->mockAdapter(['findByPidAndCity']);
+        $entityAddressAdapter->method('findByPidAndCity')->willReturn(null);
+        $container->set('huh.member.entity.address', $entityAddressAdapter);
+
+        System::setContainer($container);
+
+        $result = $hooks->switchAddress(['formatted' => ['city' => 'Berlin'], 'raw' => ['id' => '2']], [], $moduleList, $filterConfig, $listConfig);
+        $this->assertSame('Berlin', $result['formatted']['city']);
     }
 }
