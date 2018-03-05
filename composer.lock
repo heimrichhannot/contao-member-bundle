@@ -2831,12 +2831,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/heimrichhannot/contao-filter-bundle.git",
-                "reference": "7e7771c601a851aac22bef4d9fb24c37de043327"
+                "reference": "6518ef530a80bce0e7bfdfc3d33912f26170c999"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/heimrichhannot/contao-filter-bundle/zipball/7e7771c601a851aac22bef4d9fb24c37de043327",
-                "reference": "7e7771c601a851aac22bef4d9fb24c37de043327",
+                "url": "https://api.github.com/repos/heimrichhannot/contao-filter-bundle/zipball/6518ef530a80bce0e7bfdfc3d33912f26170c999",
+                "reference": "6518ef530a80bce0e7bfdfc3d33912f26170c999",
                 "shasum": ""
             },
             "require": {
@@ -2877,7 +2877,7 @@
                 "LGPL-3.0-or-later"
             ],
             "description": "A generic contao filter.",
-            "time": "2018-03-05T07:55:59+00:00"
+            "time": "2018-03-05T11:01:48+00:00"
         },
         {
             "name": "heimrichhannot/contao-haste_plus",
@@ -2951,12 +2951,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/heimrichhannot/contao-list-bundle.git",
-                "reference": "8e23bb2800f6a447c0a920549e7078c1cdc9c681"
+                "reference": "b2a8d4a03c4410e69d1134c555953994d3894db6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/heimrichhannot/contao-list-bundle/zipball/8e23bb2800f6a447c0a920549e7078c1cdc9c681",
-                "reference": "8e23bb2800f6a447c0a920549e7078c1cdc9c681",
+                "url": "https://api.github.com/repos/heimrichhannot/contao-list-bundle/zipball/b2a8d4a03c4410e69d1134c555953994d3894db6",
+                "reference": "b2a8d4a03c4410e69d1134c555953994d3894db6",
                 "shasum": ""
             },
             "require": {
@@ -3000,7 +3000,7 @@
                 "LGPL-3.0-or-later"
             ],
             "description": "This bundle offers a generic list module to use with arbitrary contao entities containing standard list handling like pagination, sorting, and filtering.",
-            "time": "2018-03-05T09:54:32+00:00"
+            "time": "2018-03-05T13:01:26+00:00"
         },
         {
             "name": "heimrichhannot/contao-multi_column_editor",

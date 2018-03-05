@@ -42,8 +42,5 @@
   },
   "extra": {
     "contao-manager-plugin": "HeimrichHannot\\MemberBundle\\ContaoManager\\Plugin"
-  },
-  "conflict": {
-    "contao/manager-plugin": "<2.0 || >=3.0"
   }
 }
