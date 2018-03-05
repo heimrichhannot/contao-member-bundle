@@ -7,8 +7,8 @@
     "php": "^7.1",
     "contao/core-bundle": "^4.4",
     "heimrichhannot/contao-fieldpalette": "^1.4.5",
-    "heimrichhannot/contao-filter-bundle": "dev-master",
-    "heimrichhannot/contao-list-bundle": "dev-master",
+    "heimrichhannot/contao-list-bundle": "^1.0-beta",
+    "heimrichhannot/contao-filter-bundle": "^1.0-beta",
     "heimrichhannot/contao-utils-bundle": "^1.0"
   },
   "require-dev": {
