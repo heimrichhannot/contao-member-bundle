@@ -28,14 +28,14 @@ class Hooks
             return $result;
         }
 
-        $memberAddress = System::getContainer()->get('huh.member.entity.address')->findByPidAndCity($result['formatted']['id'], $filter['city']);
+        $memberAddress = System::getContainer()->get('huh.member.entity.address')->findByPidAndCity($result['raw']['id'], $filter['city']);
 
         if (null === $memberAddress) {
             return $result;
         }
         $dataContainer = $filterConfig->getFilter()['dataContainer'];
         $formUtil = System::getContainer()->get('huh.utils.form');
-        $dc = DC_Table_Utils::createFromModelData($item, $dataContainer);
+        $dc = System::getContainer()->get('contao.framework')->getAdapter(DC_Table_Utils::class)->createFromModelData($item, $dataContainer);
 
         $result['formatted']['city'] = $formUtil->prepareSpecialValueForOutput('city', $memberAddress->city, $dc);
         $result['formatted']['city'] = $formUtil->escapeAllHtmlEntities($dataContainer, 'city', $result['formatted']['city']);

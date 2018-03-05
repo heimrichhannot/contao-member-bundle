@@ -8,8 +8,8 @@
 
 namespace HeimrichHannot\MemberBundle\Test\ContaoManager;
 
+use Contao\TestCase\ContaoTestCase;
 use HeimrichHannot\MemberBundle\ContaoManager\Plugin;
-use Terminal42\ChangeLanguage\Tests\ContaoTestCase;
 
 class PluginTest extends ContaoTestCase
 {

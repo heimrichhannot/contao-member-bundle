@@ -8,6 +8,7 @@
 
 namespace HeimrichHannot\MemberBundle\Choice;
 
+use Contao\StringUtil;
 use Contao\System;
 use HeimrichHannot\UtilsBundle\Choice\AbstractChoice;
 
@@ -30,7 +31,7 @@ class CityChoice extends AbstractChoice
             if (null === $member->additionalAddresses) {
                 continue;
             }
-            $additionalAddresses = deserialize($member->additionalAddresses, true);
+            $additionalAddresses = StringUtil::deserialize($member->additionalAddresses, true);
 
             foreach ($additionalAddresses as $additionalAddress) {
                 $address = System::getContainer()->get('huh.member.entity.address')->findById($additionalAddress);
