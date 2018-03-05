@@ -26,14 +26,16 @@ class CityType extends ChoiceType
         $data = $this->config->getData();
         $value = $data['city'];
 
-        $alias = 'tl_member_address_'.$element->field;
-        $tlMember = $filter['dataContainer'];
-        $builder->where($tlMember.'.city= :cityValue');
-        $builder->setParameter(':cityValue', $value, \PDO::PARAM_STR);
-        $builder->leftJoin($tlMember, 'tl_member_address', $alias, "$alias.pid=$tlMember.id");
-        $builder->orWhere($alias.".city= :$alias");
-        $builder->setParameter(":$alias", $value, \PDO::PARAM_STR);
-        $builder->groupBy($tlMember.'.id');
+        if (null !== $value && '' !== $value) {
+            $alias = 'tl_member_address_'.$element->field;
+            $tlMember = $filter['dataContainer'];
+            $builder->where($tlMember.'.city= :cityValue');
+            $builder->setParameter(':cityValue', $value, \PDO::PARAM_STR);
+            $builder->leftJoin($tlMember, 'tl_member_address', $alias, "$alias.pid=$tlMember.id");
+            $builder->orWhere($alias.".city= :$alias");
+            $builder->setParameter(":$alias", $value, \PDO::PARAM_STR);
+            $builder->groupBy($tlMember.'.id');
+        }
     }
 
     /**
