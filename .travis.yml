@@ -11,16 +11,21 @@ env:
 matrix:
   include:
   - php: 7.1
-    env: CONTAO_VERSION='4.4.*'
+    env:
+      - CONTAO_VERSION='4.4.*'
   - php: 7.2
-    env: CONTAO_VERSION='4.4.*'
+    env:
+      - CONTAO_VERSION='4.4.*'
   - php: 7.1
-    env: CONTAO_VERSION='4.5.*'
+    env:
+      - CONTAO_VERSION='4.5.*'
   - php: 7.2
-    env: CONTAO_VERSION='4.5.*'
+    env:
+      - CONTAO_VERSION='4.5.*'
   - php: 7.2
-    env: CONTAO_VERSION='4.5.*' COVERAGE='--exclude-group contao3 --coverage-clover
-      build/logs/clover.xml'
+    env:
+      - CONTAO_VERSION='4.5.*'
+      - COVERAGE='--exclude-group contao3 --coverage-clover build/logs/clover.xml'
   fast_finish: true
 before_install:
 - if [[ ! $COVERAGE ]]; then phpenv config-rm xdebug.ini || true; fi
