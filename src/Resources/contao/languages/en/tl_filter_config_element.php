@@ -9,8 +9,4 @@ $lang = &$GLOBALS['TL_LANG']['tl_filter_config_element'];
 /**
  * References
  */
-$lang['reference'] = [
-    'type' => [
-        'memberCity' => 'member city',
-    ],
-];
+$lang['reference']['type']['memberCity'] = 'member city';
