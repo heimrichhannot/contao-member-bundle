@@ -10,25 +10,21 @@ env:
   - COMPOSER_ALLOW_XDEBUG=0
 matrix:
   include:
-  - php: 7.1
-    env:
-      - CONTAO_VERSION='4.4.*'
-  - php: 7.2
-    env:
-      - CONTAO_VERSION='4.4.*'
-  - php: 7.1
-    env:
-      - CONTAO_VERSION='4.5.*'
-  - php: 7.2
-    env:
-      - CONTAO_VERSION='4.5.*'
-  - php: 7.2
-    env:
-      - CONTAO_VERSION='4.5.*'
-      - COVERAGE='--coverage-clover build/logs/clover.xml'
+    - php: 7.1
+      env: CONTAO_VERSION='4.4.*'
+    - php: 7.2
+      env: CONTAO_VERSION='4.4.*'
+    - php: 7.1
+      env: CONTAO_VERSION='4.5.*'
+    - php: 7.2
+      env: CONTAO_VERSION='4.5.*'
+    - php: 7.2
+      env: COVERAGE=1 CONTAO_VERSION='4.5.*'
+  allow_failures:
+    - env: COVERAGE=1 DEFAULT=0
   fast_finish: true
 before_install:
-- if [[ ! $COVERAGE ]]; then phpenv config-rm xdebug.ini || true; fi
+- if [[ $COVERAGE != 1]]; then phpenv config-rm xdebug.ini || true; fi
 install:
 - if [[ "$COMPOSER_FLAGS" == *"--prefer-lowest"* ]]; then composer update --no-interaction --quiet; fi
 - composer update $COMPOSER_FLAGS --no-interaction --no-suggest
@@ -44,7 +40,7 @@ notifications:
 before_script:
 - travis_wait composer install --no-interaction
 script:
-- if [[ $COVERAGE ]]; then travis_retry mkdir -p build/logs; fi
-- travis_retry php vendor/bin/phpunit $COVERAGE
+- if [[ $COVERAGE == 1 ]]; then travis_retry mkdir -p build/logs; fi
+- if [[ $COVERAGE == 1 ]]; then travis_retry php vendor/bin/phpunit --coverage-clover build/logs/clover.xml || true; fi
 after_script:
-- if [[ $COVERAGE ]]; then travis_retry php vendor/bin/coveralls -v; fi
+- if [[ $COVERAGE == 1 ]]; then travis_retry php vendor/bin/coveralls -v; fi
