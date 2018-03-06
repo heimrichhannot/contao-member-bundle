@@ -47,4 +47,4 @@ script:
 - if [[ $COVERAGE ]]; then travis_retry mkdir -p build/logs; fi
 - travis_retry php vendor/bin/phpunit $COVERAGE
 after_success:
-- if [[ $COVERAGE ]]; then travis_retry php vendor/bin/php-coveralls -v; fi
+- if [[ $COVERAGE ]]; then travis_retry php vendor/bin/php-coveralls; fi
