@@ -1,33 +1,46 @@
 language: php
-
-php:
-- 7.1
-- 7.2
-
-env:
-  - CONTAO_VERSION="4.4.*"
-  - CONTAO_VERSION="4.5.*"
-
-install:
-- composer require contao/core-bundle:${CONTAO_VERSION}
+git:
+  depth: 1
+cache:
+  directories:
+  - "$HOME/.composer/cache"
 sudo: false
-
+env:
+  global:
+  - COMPOSER_ALLOW_XDEBUG=0
+matrix:
+  include:
+  - php: 7.1
+    env: CONTAO_VERSION='4.4.*'
+  - php: 7.2
+    env: CONTAO_VERSION='4.4.*'
+  - php: 7.1
+    env: CONTAO_VERSION='4.5.*'
+  - php: 7.2
+    env: CONTAO_VERSION='4.5.*'
+  - php: 7.2
+    env: CONTAO_VERSION='4.5.*' COVERAGE='--exclude-group contao3 --coverage-clover
+      build/logs/clover.xml'
+  fast_finish: true
+before_install:
+- if [[ ! $COVERAGE ]]; then phpenv config-rm xdebug.ini || true; fi
+install:
+- if [[ "$COMPOSER_FLAGS" == *"--prefer-lowest"* ]]; then composer update --no-interaction
+  --quiet; fi
+- composer update $COMPOSER_FLAGS --no-interaction --no-suggest
 notifications:
   email:
     recipients:
-        - digitales@heimrich-hannot.de
-    on_success: never # default: change
-    on_failure: always # default: always
+    - digitales@heimrich-hannot.de
+    on_success: never
+    on_failure: always
   hipchat:
-      rooms:
-        secure: TlNfiDoWjG1zf/JeVKUUbPzByN0lZAgkge+pnVaFsoPhPMsTJ4XiXfGR0tbEaMsRoWf0vxAEvbx4imYD/od6b5xazxI4loAy5ToeDSYVPwu/upypg/bJKd55Xm3duzGIaK1t8byE+XEpntPp0qjx/+OgbTNi4XEEegc0/S8r6NQYGagD7RyOBMqL9lFys4tL354TgSAMsiMf8YsgtVJrdgkpXakACjV3qPsLWvJEZG0Dvym24UCJRvAoo5XNl3DsK0l6p9O287QMDxTpvdA0EK1HVlKNjSzEFlT2Lm7mwv5MFz6P52T/LN+5xv8fMwpFZ+TRbCCXPZxg71CgHD4yiGvNyvRN4Gn7j329KPEZ7+pFltfehvE/YXusR3mMfwW8YWp7uoRhUGu8zmvB9FblygopNyb2VgI0goKwPFvpDQTaPXz/sys8OvGsh4oYPPxj18pLPEX7lrkv4qI2sF3Zb1ZJxg61j2VPvLSt+xBHBdg7IgWK6HTj+vLOo4VALhb9bq7GGmRi/nRkYljrdf+BFkY1vjdcqdz7AWlSuJPmAi7apV/ENaQmRB55ndGisXa2HSaCYyq8/VN0PQI8VgwViZdF/sQ2fcvF5J8X7L3heLuSoDRogFi4WVEyqm7/1uJLO13+F7RWRX2LqZl8jBH2aSO2aWjsaiDQMFYLoC20irM=
-
+    rooms:
+      secure: rgKkEZcd1kENwBFU1Paf8j2arSuOw71ew20RH68XlXcHT07ywwgum+/tgIQVLpVI/LHwImVVLdAd3OXJyCgN2+wrl6O++fjvBxvi0mpAb64JcxRgTWguv4JoBDZzvq5SCmDej2hPvCh339b6a4ExGDqRHKjPn2+NKNW/YYaW0mvoun6UTXlErULVJOjiUONG1ePIVXpl3qmA2fye/LJQpBi3AdpSI7bNiv/Xj+LfG6XGjicHcY0Xd1ir0kmFf9lT4jtjcCz0zVjW6XbzdCZLfbnadHcvaDy3yh0ZgWsbEvGDR18BhINGADOs5Zzy4dU1nQqdf0wkp8qMWztJy7dFDhBTFGVPXoFOgv9FVxJLjuRc+u+wA4bPW8iQ2HU5dGFXyqyDUPzwZ9HWX/KNy32Iq9blZSCnw6FeLe09cO9MVB61zjZDcxHpzB2J23c7J/pSVo4+aTZGoMZZmIFNxxpoeNdm1PWpafYRJrxDnJO9nOfjSRWEU3mHudEcYzZAN0Amegp4jK/6I88/auOgln3eVpADAq/s85MbSt8q41y97Zs7peBDOfJm+ZWuBj6/4Ya2S2/vsNtz/RA0yywpdvJ/ZZUHOIKij39iNWkuynqC5/5t5jExcbc4Taay6Mvjixyk7/ibbpYOwpZ54ycBSOjLzMoiyyMKjK7dKCrl+SrsZ70=
 before_script:
-  - travis_wait composer install --no-interaction
-
+- travis_wait composer install --no-interaction
 script:
-  - mkdir -p build/logs
-  - php vendor/bin/phpunit --coverage-clover build/logs/clover.xml
-
+- if [[ $COVERAGE ]]; then mkdir -p build/logs; fi
+- php vendor/bin/phpunit $COVERAGE
 after_script:
-  - php vendor/bin/coveralls
+- if [[ $COVERAGE ]]; then php vendor/bin/coveralls; fi
