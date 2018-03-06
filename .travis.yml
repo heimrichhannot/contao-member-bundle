@@ -46,5 +46,5 @@ before_script:
 script:
 - if [[ $COVERAGE ]]; then travis_retry mkdir -p build/logs; fi
 - travis_retry php vendor/bin/phpunit $COVERAGE
-after_success:
+after_script:
 - if [[ $COVERAGE ]]; then travis_retry php vendor/bin/coveralls -v; fi

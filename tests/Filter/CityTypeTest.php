@@ -58,7 +58,6 @@ class CityTypeTest extends ContaoTestCase
 
     public function testGetDefaultOperator()
     {
-        $this->markTestSkipped();
         $filterConfig = $this->createMock(FilterConfig::class);
         $cityType = new CityType($filterConfig);
         $result = $cityType->getDefaultOperator($this->getFilterConfigElementModel());
@@ -67,7 +66,6 @@ class CityTypeTest extends ContaoTestCase
 
     public function testGetChoices()
     {
-        $this->markTestSkipped();
         $filterConfig = $this->createMock(FilterConfig::class);
         $cityType = new CityType($filterConfig);
         $result = $cityType->getChoices($this->getFilterConfigElementModel());
@@ -76,7 +74,6 @@ class CityTypeTest extends ContaoTestCase
 
     public function testBuildQuery()
     {
-        $this->markTestSkipped();
         $filterConfig = $this->createMock(FilterConfig::class);
         $filterConfig->method('getData')->willReturn(['city' => 'Dresden']);
         $filterConfig->method('getFilter')->willReturn(['dataContainer' => 'tl_member']);
