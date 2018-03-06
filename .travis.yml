@@ -30,8 +30,7 @@ matrix:
 before_install:
 - if [[ ! $COVERAGE ]]; then phpenv config-rm xdebug.ini || true; fi
 install:
-- if [[ "$COMPOSER_FLAGS" == *"--prefer-lowest"* ]]; then composer update --no-interaction
-  --quiet; fi
+- if [[ "$COMPOSER_FLAGS" == *"--prefer-lowest"* ]]; then composer update --no-interaction --quiet; fi
 - composer update $COMPOSER_FLAGS --no-interaction --no-suggest
 notifications:
   email:
