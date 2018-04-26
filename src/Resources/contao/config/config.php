@@ -9,3 +9,13 @@
  * Hooks
  */
 $GLOBALS['TL_HOOKS']['parseListItem'][] = ['huh.member.hooks', 'switchAddress'];
+
+/**
+ * Modules
+ */
+$GLOBALS['FE_MOD']['user']['registration_plus'] = '\HeimrichHannot\MemberBundle\Module\ModuleRegistrationPlus';
+
+/**
+ * Models
+ */
+$GLOBALS['TL_MODELS']['tl_registration_plus'] = '\HeimrichHannot\MemberBundle\Form\MemberRegistrationPlusForm';

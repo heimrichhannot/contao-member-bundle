@@ -17,3 +17,13 @@ services:
   huh.member.hooks:
     class: HeimrichHannot\MemberBundle\Backend\Hooks
     public: true
+  huh.member.manager.registration:
+    class: HeimrichHannot\MemberBundle\Manager\RegistrationManager
+    public: true
+    arguments:
+      - "@contao.framework"
+  huh.member.manager.message:
+    class: HeimrichHannot\MemberBundle\Manager\MemberMessageManager
+    public: true
+    arguments:
+      - "@contao.framework"
