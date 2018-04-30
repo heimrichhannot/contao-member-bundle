@@ -10,8 +10,9 @@ namespace HeimrichHannot\MemberBundle\Manager;
 
 use Contao\CoreBundle\Framework\ContaoFrameworkInterface;
 use Contao\Message;
+use Contao\System;
 
-class MemberMessageManager
+class MemberMessageManager extends Message
 {
     const MEMBER_MESSAGE_DANGER = 'MEMBER_DANGER';
     const MEMBER_MESSAGE_WARNING = 'MEMBER_WARNING';
@@ -34,16 +35,9 @@ class MemberMessageManager
      *
      * @param string $message The danger message
      */
-    public function addDanger(string $message)
+    public static function addDanger(string $message)
     {
-        /** @var Message $adapter */
-        $adapter = $this->framework->getAdapter(Message::class);
-
-        if (null === $adapter) {
-            return;
-        }
-
-        $adapter->add($message, static::MEMBER_MESSAGE_DANGER);
+        static::add($message, static::MEMBER_MESSAGE_DANGER);
     }
 
     /**
@@ -51,16 +45,9 @@ class MemberMessageManager
      *
      * @param string $message The warning message
      */
-    public function addWarning(string $message)
+    public static function addWarning(string $message)
     {
-        /** @var Message $adapter */
-        $adapter = $this->framework->getAdapter(Message::class);
-
-        if (null === $adapter) {
-            return;
-        }
-
-        $adapter->add($message, static::MEMBER_MESSAGE_WARNING);
+        static::add($message, static::MEMBER_MESSAGE_WARNING);
     }
 
     /**
@@ -68,15 +55,9 @@ class MemberMessageManager
      *
      * @param string $message The info message
      */
-    public function addInfo(string $message)
+    public static function addInfo($message, $strScope = TL_MODE)
     {
-        /** @var Message $adapter */
-        $adapter = $this->framework->getAdapter(Message::class);
-
-        if (null === $adapter) {
-            return;
-        }
-        $adapter->add($message, static::MEMBER_MESSAGE_INFO);
+        static::add($message, static::MEMBER_MESSAGE_INFO);
     }
 
     /**
@@ -84,15 +65,9 @@ class MemberMessageManager
      *
      * @param string $message The success message
      */
-    public function addSuccess(string $message)
+    public static function addSuccess(string $message)
     {
-        /** @var Message $adapter */
-        $adapter = $this->framework->getAdapter(Message::class);
-
-        if (null === $adapter) {
-            return;
-        }
-        $adapter->add($message, static::MEMBER_MESSAGE_SUCCESS);
+        static::add($message, static::MEMBER_MESSAGE_SUCCESS);
     }
 
     /**
@@ -100,15 +75,9 @@ class MemberMessageManager
      *
      * @param string $message The preformatted message
      */
-    public function addRaw(string $message)
+    public static function addRaw($message, $strScope = TL_MODE)
     {
-        /** @var Message $adapter */
-        $adapter = $this->framework->getAdapter(Message::class);
-
-        if (null === $adapter) {
-            return;
-        }
-        $adapter->add($message, 'TL_RAW');
+        static::add($message, 'TL_RAW');
     }
 
     /**
@@ -119,7 +88,7 @@ class MemberMessageManager
      *
      * @return string The messages HTML markup
      */
-    public function generate(bool $scLayout = false, bool $noWrapper = false)
+    public static function generate($scLayout = false, bool $noWrapper = false)
     {
         $strMessages = '';
 
@@ -162,11 +131,10 @@ class MemberMessageManager
      *
      * @param array $types containing message valid types from getTypes that should be unset
      */
-    public function clearMessages(array $types = [])
+    public static function clearMessages(array $types = [])
     {
-        $types = array_intersect($this->getTypes(), $types);
-
-        foreach ($this->getTypes() as $strType) {
+        $types = array_intersect(static::getTypes(), $types);
+        foreach (static::getTypes() as $strType) {
             if (!empty($types) && in_array($strType, $types, true)) {
                 unset($_SESSION[$strType]);
                 continue;
@@ -181,20 +149,15 @@ class MemberMessageManager
      *
      * @return bool true if messages are present, otherwise false
      */
-    public function hasMessages()
+    public static function hasMessages($strScope = TL_MODE)
     {
-        $hasMessages = false;
-
-        foreach ($this->getTypes() as $strType) {
-            if (!is_array($_SESSION[$strType])) {
-                continue;
+        foreach (static::getTypes() as $strType) {
+            if (System::getContainer()->get('session')->getFlashBag()->has(static::getFlashBagKey($strType))) {
+                return true;
             }
-
-            $hasMessages = true;
-            break;
         }
 
-        return $hasMessages;
+        return false;
     }
 
     /**
@@ -202,7 +165,7 @@ class MemberMessageManager
      *
      * @return array An array of message types
      */
-    public function getTypes()
+    public static function getTypes()
     {
         return [static::MEMBER_MESSAGE_DANGER, static::MEMBER_MESSAGE_WARNING, static::MEMBER_MESSAGE_INFO, static::MEMBER_MESSAGE_SUCCESS, static::MEMBER_MESSAGE_RAW];
     }
