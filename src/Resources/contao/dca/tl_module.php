@@ -33,7 +33,6 @@ $dc['subpalettes']['reg_activate_plus'] = 'formHybridConfirmationMailRecipientFi
 /**
  * Callbacks
  */
-$dc['config']['onload_callback'][] = ['tl_module_member_plus', 'modifyPalette'];
 
 /**
  * Fields
@@ -49,77 +48,3 @@ $arrFields = [
 ];
 
 $dc['fields'] = array_merge($dc['fields'], $arrFields);
-
-class tl_module_member_plus extends \Backend
-{
-
-    /**
-     * Return all news templates as array
-     *
-     * @return array
-     */
-    public function getMemberlistTemplates()
-    {
-        return $this->getTemplateGroup('memberlist_');
-    }
-
-    public function modifyPalette()
-    {
-        $objModule = \ModuleModel::findByPk(\Input::get('id'));
-        $arrDc     = &$GLOBALS['TL_DCA']['tl_module'];
-
-        // submission -> already done in formhybrid
-
-        // confirmation
-        $arrFieldsToHide = [
-            'formHybridConfirmationMailSender',
-            'formHybridConfirmationMailSubject',
-            'formHybridConfirmationMailText',
-            'formHybridConfirmationMailTemplate',
-            'formHybridConfirmationMailAttachment',
-        ];
-
-        if (in_array('avisota-core', \ModuleLoader::getActive()) && in_array('formhybrid', \ModuleLoader::getActive()) && $objModule->reg_activate_plus && $objModule->formHybridConfirmationAvisotaMessage) {
-            $arrDc['subpalettes']['reg_activate_plus'] = str_replace($arrFieldsToHide, array_map(function () {
-                return '';
-            }, $arrFieldsToHide), $arrDc['subpalettes']['reg_activate_plus']);
-
-            $arrDc['subpalettes']['reg_activate_plus'] = str_replace('formHybridConfirmationAvisotaMessage', 'formHybridConfirmationAvisotaMessage,formHybridConfirmationAvisotaSalutationGroup', $arrDc['subpalettes']['reg_activate_plus']);
-        }
-    }
-
-    /**
-     * Return all feViewable fields as array
-     *
-     * @param DataContainer $dc
-     *
-     * @return array
-     */
-    public function getViewableMemberFields(DataContainer $dc)
-    {
-        \Controller::loadDataContainer('tl_member');
-        \Controller::loadLanguageFile('tl_member');
-
-        $arrOptions = [];
-
-        $arrFields = $GLOBALS['TL_DCA']['tl_member']['fields'];
-
-        if (!is_array($arrFields) || empty($arrFields)) {
-            return $arrOptions;
-        }
-
-        foreach ($arrFields as $strName => $arrData) {
-            if (!isset($arrData['inputType'])) {
-                continue;
-            }
-
-            if (!$arrData['eval']['feViewable']) {
-                continue;
-            }
-
-            $arrOptions[$strName] = $arrData['label'][0];
-        }
-
-        return $arrOptions;
-    }
-}
