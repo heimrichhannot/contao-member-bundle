@@ -13,6 +13,7 @@ $arrDca['fields']['additionalAddresses'] = [
     'inputType'    => 'fieldpalette',
     'foreignKey'   => 'tl_member_address.id',
     'relation'     => ['type' => 'hasMany', 'load' => 'eager'],
+    'eval'         => ['tl_class' => 'clr'],
     'sql'          => "blob NULL",
     'fieldpalette' => [
         'config'   => [
