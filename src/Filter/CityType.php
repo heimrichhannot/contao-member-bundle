@@ -29,10 +29,12 @@ class CityType extends ChoiceType
             $value = $data['city'];
             $alias = 'tl_member_address_'.$element->field;
             $tlMember = $filter['dataContainer'];
-            $builder->where($tlMember.'.city= :cityValue');
-            $builder->setParameter(':cityValue', $value, \PDO::PARAM_STR);
             $builder->leftJoin($tlMember, 'tl_member_address', $alias, "$alias.pid=$tlMember.id");
-            $builder->orWhere($alias.".city= :$alias");
+
+            $orX = $builder->expr()->orX($tlMember.'.city= :cityValue', $alias.".city= :$alias");
+            $builder->andWhere($orX);
+
+            $builder->setParameter(':cityValue', $value, \PDO::PARAM_STR);
             $builder->setParameter(":$alias", $value, \PDO::PARAM_STR);
             $builder->groupBy($tlMember.'.id');
         }
