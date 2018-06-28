@@ -8,7 +8,9 @@
 
 namespace HeimrichHannot\MemberBundle\Model;
 
-class MemberAddressModel extends \Contao\Model
+use HeimrichHannot\FieldPalette\FieldPaletteModel;
+
+class MemberAddressModel extends FieldPaletteModel
 {
     protected static $strTable = 'tl_member_address';
 }
