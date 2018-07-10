@@ -1,0 +1,2 @@
+{{ raw.academicTitle|default() ? raw.academicTitle ~ ' ' : '' }}{{ raw.firstname }} {{ raw.nobilityTitle|default() ? raw.nobilityTitle ~ ' ' : '' }}{{ raw.lastname }}
+{% if raw.id|default %}{{ '[ID:' ~ raw.id ~ ']' }}{% endif %}
