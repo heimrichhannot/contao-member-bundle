@@ -8,7 +8,7 @@
 
 namespace HeimrichHannot\MemberBundle\Model;
 
-use HeimrichHannot\FieldPalette\FieldPaletteModel;
+use HeimrichHannot\FieldpaletteBundle\Model\FieldPaletteModel;
 
 class MemberAddressModel extends FieldPaletteModel
 {
