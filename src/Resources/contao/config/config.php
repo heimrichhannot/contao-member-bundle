@@ -18,7 +18,7 @@ $GLOBALS['FE_MOD']['user']['registration_plus'] = '\HeimrichHannot\MemberBundle\
 /**
  * Models
  */
-$GLOBALS['TL_MODELS']['tl_registration_plus'] = '\HeimrichHannot\MemberBundle\Form\MemberRegistrationPlusForm';
+$GLOBALS['TL_MODELS']['tl_member_address'] = '\HeimrichHannot\MemberBundle\Model\MemberAddressModel';
 
 /**
  * Constants
