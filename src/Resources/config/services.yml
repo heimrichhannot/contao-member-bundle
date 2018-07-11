@@ -14,9 +14,11 @@ services:
     public: true
     arguments:
       - "@contao.framework"
-  huh.member.hooks:
-    class: HeimrichHannot\MemberBundle\Backend\Hooks
+  huh.member.backend.member:
+    class: HeimrichHannot\MemberBundle\Backend\Member
     public: true
+    arguments:
+      - "@contao.framework"
   huh.member.manager.registration:
     class: HeimrichHannot\MemberBundle\Manager\RegistrationManager
     public: true

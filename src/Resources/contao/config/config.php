@@ -8,7 +8,7 @@
 /**
  * Hooks
  */
-$GLOBALS['TL_HOOKS']['parseListItem'][] = ['huh.member.hooks', 'switchAddress'];
+$GLOBALS['TL_HOOKS']['parseListItem']['huh.member.switchAddress'] = ['huh.member.listener.hooks', 'switchAddress'];
 
 /**
  * Modules

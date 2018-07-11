@@ -6,16 +6,38 @@
  * @license LGPL-3.0-or-later
  */
 
-namespace HeimrichHannot\MemberBundle\Backend;
+namespace HeimrichHannot\MemberBundle\EventListener;
 
+use Contao\CoreBundle\Framework\ContaoFrameworkInterface;
 use Contao\Module;
 use Contao\System;
 use HeimrichHannot\FilterBundle\Config\FilterConfig;
 use HeimrichHannot\ListBundle\Model\ListConfigModel;
 use HeimrichHannot\UtilsBundle\Driver\DC_Table_Utils;
 
-class Hooks
+class HookListener
 {
+    /**
+     * @var ContaoFrameworkInterface
+     */
+    private $framework;
+
+    public function __construct(ContaoFrameworkInterface $framework)
+    {
+        $this->framework = $framework;
+    }
+
+    /**
+     * Switch Address with member address based on filter data.
+     *
+     * @param                 $result
+     * @param                 $item
+     * @param Module          $moduleList
+     * @param FilterConfig    $filterConfig
+     * @param ListConfigModel $listConfig
+     *
+     * @return mixed
+     */
     public function switchAddress($result, $item, Module $moduleList, FilterConfig $filterConfig, ListConfigModel $listConfig)
     {
         $filter = $filterConfig->getData();

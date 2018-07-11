@@ -38,7 +38,7 @@ $dc['subpalettes']['reg_activate_plus'] = 'formHybridConfirmationMailRecipientFi
  * Fields
  */
 $arrFields = [
-    'reg_activate_plus' => [
+    'reg_activate_plus'  => [
         'label'     => &$GLOBALS['TL_LANG']['tl_module']['reg_activate'],
         'exclude'   => true,
         'inputType' => 'checkbox',

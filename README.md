@@ -4,3 +4,34 @@
 [![](https://img.shields.io/coveralls/heimrichhannot/contao-member-bundle/master.svg)](https://coveralls.io/github/heimrichhannot/contao-member-bundle)
 
 # contao-member-bundle
+
+This bundle contains a collection of enhancements for contao frontend members.
+
+## Migration notices
+
+If you used `heimrichhannot/contao-member_plus` before, not all features are part of this bundle yet.
+
+- content element `memberlist` is no longer part of this bundle, use `heimrichhannot/contao-list-bundle` and content element `list_preselect` instead
+
+## Features
+
+### Additional fields
+- headline
+- alias
+- academicTitle
+- academicDegree
+- extendedTitle
+- nobilityTitle
+- jobTitles
+- position
+- street2
+- addressText
+- image (avatar/profile image)
+- captcha
+- linkedinProfile
+- xingProfile
+- facebookProfile
+- twitterProfile
+- googlePlusProfile
+- foreignLanguages
+- additionalAddresses (phone,fax,company,street,street2,postal,city,state,country,addressText)
