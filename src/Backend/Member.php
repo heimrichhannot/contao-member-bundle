@@ -25,6 +25,19 @@ class Member
     }
 
     /**
+     * Add an URI scheme if not existing to an url.
+     *
+     * @param string        $varValue
+     * @param DataContainer $dc
+     *
+     * @return string
+     */
+    public function addURIScheme(string $varValue, DataContainer $dc): string
+    {
+        return System::getContainer()->get('huh.utils.url')->addURIScheme($varValue);
+    }
+
+    /**
      * @param string        $varValue
      * @param DataContainer $dc
      *
