@@ -25,6 +25,15 @@ $dc['palettes']['registration_plus'] = '{title_legend},name,headline,type;
 	{protected_legend:hide},protected;
 	{expert_legend:hide},guests';
 
+$dc['palettes']['login_registration'] =
+    '{title_legend},name,headline,type;
+	{config_legend},formHybridDataContainer,formHybridPalette,formHybridEditable,formHybridAddEditableRequired,formHybridTemplate,formHybridCustomSubTemplates,formHybridCssClass,formHybridAddDefaultValues,disableCaptcha,bypassPasswordConfirm,newsletters;
+	{account_legend},reg_groups,reg_allowLogin;
+	{email_legend:hide},reg_jumpTo,formHybridSendConfirmationAsNotification,formHybridSendSubmissionAsNotification,formHybridSendSubmissionViaEmail;
+	{template_legend:hide},customTpl;{redirect_legend},jumpTo, redirectLogin;
+	{protected_legend:hide},protected;
+	{expert_legend:hide},guests';
+
 /**
  * Subpalettes
  */
