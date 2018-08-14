@@ -53,7 +53,10 @@ class CityType extends ChoiceType
      */
     public function getChoices(FilterConfigElementModel $element)
     {
-        return System::getContainer()->get('huh.member.choice.city')->getCachedChoices([$element, $this->config->getFilter()]);
+        $choices = System::getContainer()->get('huh.member.choice.city')->getCachedChoices([$element, $this->config->getFilter()]);
+        ksort($choices);
+
+        return $choices;
     }
 
     /**
