@@ -26,7 +26,7 @@ class ModuleLoginRegistration extends ModuleRegistration
 
     public function generate()
     {
-        if (TL_MODE === 'BE') {
+        if (System::getContainer()->get('huh.utils.container')->isBackend()) {
             $objTemplate = new BackendTemplate('be_wildcard');
             $objTemplate->wildcard = '### '.utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['login_registration_plus'][0]).' ###';
             $objTemplate->title = $this->headline;
@@ -95,10 +95,7 @@ class ModuleLoginRegistration extends ModuleRegistration
 
             if ($this->User->lastLogin > 0) {
                 global $objPage;
-                $this->Template->lastLogin = sprintf(
-                    $GLOBALS['TL_LANG']['MSC']['lastLogin'][1],
-                    \Date::parse($objPage->datimFormat, $this->User->lastLogin)
-                );
+                $this->Template->lastLogin = sprintf($GLOBALS['TL_LANG']['MSC']['lastLogin'][1], \Date::parse($objPage->datimFormat, $this->User->lastLogin));
             }
 
             return;
@@ -114,7 +111,7 @@ class ModuleLoginRegistration extends ModuleRegistration
         }
 
         // Activate account
-        if ('' !== \Input::get('token')) {
+        if ('' !== System::getContainer()->get('huh.request')->getGet('token') && !empty(System::getContainer()->get('huh.request')->getGet('token'))) {
             $this->activateAcount();
         }
 
