@@ -18,7 +18,7 @@ $dca = &$GLOBALS['TL_DCA']['tl_member'];
 $dca['palettes']['__selector__'][] = 'addImage';
 
 // title
-$dca['palettes']['default'] = '{title_legend},headline;' . $dca['palettes']['default'];
+$dca['palettes']['default'] = '{title_legend},headline;'.$dca['palettes']['default'];
 // alias - must be invoked after firstname & title, otherwise not available in save_callback
 $dca['palettes']['default'] = str_replace('lastname', 'lastname,alias', $dca['palettes']['default']);
 // titles
@@ -225,6 +225,7 @@ $fields = [
     'additionalAddresses' => [
         'label'        => &$GLOBALS['TL_LANG']['tl_member']['additionalAddresses'],
         'inputType'    => 'fieldpalette',
+        'exclude'      => true,
         'foreignKey'   => 'tl_member_address.id',
         'relation'     => ['type' => 'hasMany', 'load' => 'eager'],
         'eval'         => ['tl_class' => 'clr'],
