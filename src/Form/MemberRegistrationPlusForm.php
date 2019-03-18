@@ -8,7 +8,11 @@
 
 namespace HeimrichHannot\MemberBundle\Form;
 
+use Contao\Config;
 use Contao\Controller;
+use Contao\DataContainer;
+use Contao\Environment;
+use Contao\Idna;
 use Contao\MemberModel;
 use Contao\PageModel;
 use Contao\System;
@@ -64,7 +68,7 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
         return $version;
     }
 
-    protected function onSubmitCallback(\DataContainer $dc)
+    protected function onSubmitCallback(DataContainer $dc)
     {
         // HOOK: send insert ID and user data
         if (isset($GLOBALS['TL_HOOKS']['preRegistration']) && is_array($GLOBALS['TL_HOOKS']['preRegistration'])) {
@@ -117,9 +121,8 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
     {
         $arrSubmissionData = parent::prepareSubmissionData();
 
-        $arrSubmissionData['domain'] = \Idna::decode(\Environment::get('host'));
-        $arrSubmissionData['activation'] = \Idna::decode(\Environment::get('base')).\Environment::get('request').((\Config::get('disableAlias')
-                                                                                                                       || false !== strpos(\Environment::get('request'), '?')) ? '&' : '?').'token='.$this->activeRecord->activation;
+        $arrSubmissionData['domain'] = Idna::decode(Environment::get('host'));
+        $arrSubmissionData['activation'] = $this->getActivation();
 
         if (in_array('newsletter', System::getContainer()->get('huh.utils.container')->getActiveBundles(), true)) {
             // Replace the wildcard
@@ -141,4 +144,19 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
     protected function compile()
     {
     }
+    
+    /**
+     * @return string
+     */
+    protected function getActivation()
+    {
+        $redirect = Environment::get('base');
+        
+        $redirect .= $this->reg_jumpTo ? System::getContainer()->get('huh.utils.url')->getJumpToPageObject($this->reg_jumpTo)->alias : Environment::get('request');
+        
+        $redirect .= ((Config::get('disableAlias') || false !== strpos(Environment::get('request'), '?')) ? '&' : '?').'token='.$this->activeRecord->activation;
+     
+        return Idna::decode($redirect);
+    }
 }
+
