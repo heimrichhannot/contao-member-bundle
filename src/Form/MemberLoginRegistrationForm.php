@@ -35,7 +35,7 @@ class MemberLoginRegistrationForm extends Form
         }
 
         // add password to default palette
-        if (in_array('password', deserialize($this->objModule->formHybridEditable), true)) {
+        if (\in_array('password', deserialize($this->objModule->formHybridEditable), true)) {
             $this->dca['palettes']['default'] = str_replace('login;', 'login,password,password_noConfirm;', $this->dca['palettes']['default']);
         }
 
@@ -47,7 +47,7 @@ class MemberLoginRegistrationForm extends Form
         $this->dca['fields']['email']['eval']['unique'] = false;
 
         // HOOK: send insert ID and user data
-        if (isset($GLOBALS['TL_HOOKS']['modifyDCLoginRegistrationPlusForm']) && is_array($GLOBALS['TL_HOOKS']['modifyDCLoginRegistrationPlusForm'])) {
+        if (isset($GLOBALS['TL_HOOKS']['modifyDCLoginRegistrationPlusForm']) && \is_array($GLOBALS['TL_HOOKS']['modifyDCLoginRegistrationPlusForm'])) {
             foreach ($GLOBALS['TL_HOOKS']['modifyDCLoginRegistrationPlusForm'] as $callback) {
                 $this->import($callback[0]);
                 $this->{$callback[0]}->{$callback[1]}($this->dca, $this->objModule);
@@ -75,7 +75,7 @@ class MemberLoginRegistrationForm extends Form
     protected function onSubmitCallback(\DataContainer $dc)
     {
         // HOOK: send insert ID and user data
-        if (isset($GLOBALS['TL_HOOKS']['preLoginRegistration']) && is_array($GLOBALS['TL_HOOKS']['preLoginRegistration'])) {
+        if (isset($GLOBALS['TL_HOOKS']['preLoginRegistration']) && \is_array($GLOBALS['TL_HOOKS']['preLoginRegistration'])) {
             foreach ($GLOBALS['TL_HOOKS']['preLoginRegistration'] as $callback) {
                 $this->import($callback[0]);
                 $this->{$callback[0]}->{$callback[1]}($this->objModule);
@@ -103,7 +103,7 @@ class MemberLoginRegistrationForm extends Form
 
         $this->domainList = $this->getDomainList();
 
-        if (is_array($this->domainList) && !empty($this->domainList)) {
+        if (\is_array($this->domainList) && !empty($this->domainList)) {
             $this->domainCheck = true;
         }
 
@@ -199,7 +199,7 @@ class MemberLoginRegistrationForm extends Form
         $arrData['member_email'] = $arrData['email'];
 
         // Set default groups
-        if (!array_key_exists('groups', $arrData)) {
+        if (!\array_key_exists('groups', $arrData)) {
             $arrData['groups'] = $this->reg_groups;
         }
 
@@ -212,7 +212,7 @@ class MemberLoginRegistrationForm extends Form
         }
 
         // Make sure newsletter is an array
-        if (isset($arrData['newsletter']) && !is_array($arrData['newsletter'])) {
+        if (isset($arrData['newsletter']) && !\is_array($arrData['newsletter'])) {
             $arrData['newsletter'] = [$arrData['newsletter']];
         }
 
@@ -247,7 +247,7 @@ class MemberLoginRegistrationForm extends Form
         }
 
         // HOOK: send insert ID and user data
-        if (isset($GLOBALS['TL_HOOKS']['createNewUser']) && is_array($GLOBALS['TL_HOOKS']['createNewUser'])) {
+        if (isset($GLOBALS['TL_HOOKS']['createNewUser']) && \is_array($GLOBALS['TL_HOOKS']['createNewUser'])) {
             foreach ($GLOBALS['TL_HOOKS']['createNewUser'] as $callback) {
                 $this->import($callback[0]);
                 $this->{$callback[0]}->{$callback[1]}($objNewUser->id, $arrData, $this);
@@ -298,11 +298,11 @@ class MemberLoginRegistrationForm extends Form
 
             $v = deserialize($v);
 
-            if ('dateOfBirth' === $k && strlen($v)) {
+            if ('dateOfBirth' === $k && \strlen($v)) {
                 $v = \Date::parse(\Config::get('dateFormat'), $v);
             }
 
-            $strData .= $GLOBALS['TL_LANG']['tl_member'][$k][0].': '.(is_array($v) ? implode(', ', $v) : $v)."\n";
+            $strData .= $GLOBALS['TL_LANG']['tl_member'][$k][0].': '.(\is_array($v) ? implode(', ', $v) : $v)."\n";
         }
 
         $objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['adminText'], $intId, $strData."\n")."\n";
@@ -326,7 +326,7 @@ class MemberLoginRegistrationForm extends Form
                 if (null !== $objMember) {
                     $arrGroups = deserialize($objMember->groups);
 
-                    if (!empty($arrGroups) && is_array($arrGroups)) {
+                    if (!empty($arrGroups) && \is_array($arrGroups)) {
                         $objGroupPage = \MemberGroupModel::findFirstActiveWithJumpToByIds($arrGroups);
 
                         if (null !== $objGroupPage) {
@@ -376,7 +376,7 @@ class MemberLoginRegistrationForm extends Form
     {
         $arrDomains = [];
 
-        if (!is_array($this->allowedMailDomains) || empty($this->allowedMailDomains)) {
+        if (!\is_array($this->allowedMailDomains) || empty($this->allowedMailDomains)) {
             return $arrDomains;
         }
 

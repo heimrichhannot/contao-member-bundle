@@ -65,7 +65,7 @@ class RegistrationManager
         $this->accountActivatedMessage = $GLOBALS['TL_LANG']['MSC']['accountActivated'];
 
         // HOOK: post activation callback
-        if (isset($GLOBALS['TL_HOOKS']['activateAccount']) && is_array($GLOBALS['TL_HOOKS']['activateAccount'])) {
+        if (isset($GLOBALS['TL_HOOKS']['activateAccount']) && \is_array($GLOBALS['TL_HOOKS']['activateAccount'])) {
             foreach ($GLOBALS['TL_HOOKS']['activateAccount'] as $callback) {
                 System::importStatic($callback[0]);
                 $this->{$callback[0]}->{$callback[1]}($objMember, $this);

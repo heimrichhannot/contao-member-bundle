@@ -94,7 +94,7 @@ class MemberMessageManager extends Message
 
         // Regular messages
         foreach (static::getTypes() as $strType) {
-            if (!is_array($_SESSION[$strType])) {
+            if (!\is_array($_SESSION[$strType])) {
                 continue;
             }
 
@@ -135,7 +135,7 @@ class MemberMessageManager extends Message
     {
         $types = array_intersect(static::getTypes(), $types);
         foreach (static::getTypes() as $strType) {
-            if (!empty($types) && in_array($strType, $types, true)) {
+            if (!empty($types) && \in_array($strType, $types, true)) {
                 unset($_SESSION[$strType]);
                 continue;
             }

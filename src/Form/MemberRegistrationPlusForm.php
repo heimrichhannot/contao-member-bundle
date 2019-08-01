@@ -36,7 +36,7 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
         }
 
         // HOOK: send insert ID and user data
-        if (isset($GLOBALS['TL_HOOKS']['modifyDCRegistrationPlusForm']) && is_array($GLOBALS['TL_HOOKS']['modifyDCRegistrationPlusForm'])) {
+        if (isset($GLOBALS['TL_HOOKS']['modifyDCRegistrationPlusForm']) && \is_array($GLOBALS['TL_HOOKS']['modifyDCRegistrationPlusForm'])) {
             foreach ($GLOBALS['TL_HOOKS']['modifyDCRegistrationPlusForm'] as $callback) {
                 $this->import($callback[0]);
                 $this->{$callback[0]}->{$callback[1]}($this->dca, $this->objModule);
@@ -71,7 +71,7 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
     protected function onSubmitCallback(DataContainer $dc)
     {
         // HOOK: send insert ID and user data
-        if (isset($GLOBALS['TL_HOOKS']['preRegistration']) && is_array($GLOBALS['TL_HOOKS']['preRegistration'])) {
+        if (isset($GLOBALS['TL_HOOKS']['preRegistration']) && \is_array($GLOBALS['TL_HOOKS']['preRegistration'])) {
             foreach ($GLOBALS['TL_HOOKS']['preRegistration'] as $callback) {
                 $this->import($callback[0]);
                 $this->{$callback[0]}->{$callback[1]}($dc->activeRecord->id, $dc->activeRecord, $this->objModule);
@@ -99,7 +99,7 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
         }
 
         // HOOK: send insert ID and user data
-        if (isset($GLOBALS['TL_HOOKS']['createNewUser']) && is_array($GLOBALS['TL_HOOKS']['createNewUser'])) {
+        if (isset($GLOBALS['TL_HOOKS']['createNewUser']) && \is_array($GLOBALS['TL_HOOKS']['createNewUser'])) {
             foreach ($GLOBALS['TL_HOOKS']['createNewUser'] as $callback) {
                 $this->import($callback[0]);
                 $this->{$callback[0]}->{$callback[1]}($objMember->id, $objMember->row(), $this->objModule);
@@ -124,7 +124,7 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
         $arrSubmissionData['domain'] = Idna::decode(Environment::get('host'));
         $arrSubmissionData['activation'] = $this->getActivation();
 
-        if (in_array('newsletter', System::getContainer()->get('huh.utils.container')->getActiveBundles(), true)) {
+        if (\in_array('newsletter', System::getContainer()->get('huh.utils.container')->getActiveBundles(), true)) {
             // Replace the wildcard
             if (!empty($this->objModel->newsletter)) {
                 $objChannels = \Contao\NewsletterChannelModel::findByIds($this->activeRecord->newsletter);
@@ -144,19 +144,18 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
     protected function compile()
     {
     }
-    
+
     /**
      * @return string
      */
     protected function getActivation()
     {
         $redirect = Environment::get('base');
-        
+
         $redirect .= $this->reg_jumpTo ? System::getContainer()->get('huh.utils.url')->getJumpToPageObject($this->reg_jumpTo)->alias : Environment::get('request');
-        
+
         $redirect .= ((Config::get('disableAlias') || false !== strpos(Environment::get('request'), '?')) ? '&' : '?').'token='.$this->activeRecord->activation;
-     
+
         return Idna::decode($redirect);
     }
 }
-

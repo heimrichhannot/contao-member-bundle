@@ -63,7 +63,7 @@ class MemberPlusModel extends MemberModel
      */
     public static function findActiveByParentAndIdOrAlias($varId, $arrPids, array $arrOptions = [])
     {
-        if (!is_array($arrPids) || empty($arrPids)) {
+        if (!\is_array($arrPids) || empty($arrPids)) {
             return null;
         }
 
@@ -98,7 +98,7 @@ class MemberPlusModel extends MemberModel
      */
     public static function findActiveByIds($arrIds, array $arrOptions = [])
     {
-        if (empty($arrIds) || !is_array($arrIds)) {
+        if (empty($arrIds) || !\is_array($arrIds)) {
             return null;
         }
 
@@ -133,7 +133,7 @@ class MemberPlusModel extends MemberModel
         $time = time();
         $t = static::$strTable;
 
-        if (!is_array($arrGroups) || empty($arrGroups)) {
+        if (!\is_array($arrGroups) || empty($arrGroups)) {
             return null;
         }
 

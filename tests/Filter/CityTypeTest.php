@@ -37,8 +37,8 @@ class CityTypeTest extends ContaoTestCase
         $fs = new Filesystem();
         $fs->mkdir($this->getTempDir().'/assets/images');
 
-        if (!defined('TL_ROOT')) {
-            define('TL_ROOT', $this->getTempDir());
+        if (!\defined('TL_ROOT')) {
+            \define('TL_ROOT', $this->getTempDir());
         }
 
         $GLOBALS['TL_LANGUAGE'] = 'de';

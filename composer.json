@@ -6,9 +6,8 @@
   "require": {
     "php": "^7.1",
     "contao/core-bundle": "^4.4",
-    "symfony/framework-bundle": "^3.4",
     "heimrichhannot/contao-fieldpalette-bundle": "~0.2||~1.0",
-    "heimrichhannot/contao-list-bundle": "^1.0-beta",
+    "heimrichhannot/contao-list-bundle": "^1.0-beta|^1.0",
     "heimrichhannot/contao-utils-bundle": "^2.0",
     "heimrichhannot/contao-formhybrid": "^3.0",
     "heimrichhannot/contao-tagsinput": "^2.2"

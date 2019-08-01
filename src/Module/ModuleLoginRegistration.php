@@ -52,7 +52,7 @@ class ModuleLoginRegistration extends ModuleRegistration
             $strRedirect = Environment::get('request');
 
             // Redirect to last page visited
-            if ($this->redirectBack && strlen($_SESSION['LAST_PAGE_VISITED'])) {
+            if ($this->redirectBack && \strlen($_SESSION['LAST_PAGE_VISITED'])) {
                 $strRedirect = $_SESSION['LAST_PAGE_VISITED'];
             } // Redirect home if the page is protected
             elseif ($objPage->protected) {
@@ -72,7 +72,7 @@ class ModuleLoginRegistration extends ModuleRegistration
         $this->editable = $this->objForm->getEditableFields();
 
         // Return if there are no editable fields
-        if (!is_array($this->editable) || empty($this->editable)) {
+        if (!\is_array($this->editable) || empty($this->editable)) {
             return '';
         }
 
@@ -151,7 +151,7 @@ class ModuleLoginRegistration extends ModuleRegistration
         $this->accountActivatedMessage = $GLOBALS['TL_LANG']['MSC']['accountActivated'];
 
         // HOOK: post activation callback
-        if (isset($GLOBALS['TL_HOOKS']['activateAccount']) && is_array($GLOBALS['TL_HOOKS']['activateAccount'])) {
+        if (isset($GLOBALS['TL_HOOKS']['activateAccount']) && \is_array($GLOBALS['TL_HOOKS']['activateAccount'])) {
             foreach ($GLOBALS['TL_HOOKS']['activateAccount'] as $callback) {
                 $this->import($callback[0]);
                 $this->{$callback[0]}->{$callback[1]}($member, $this);

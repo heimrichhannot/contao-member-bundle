@@ -57,7 +57,7 @@ class ModuleRegistrationPlus extends ModuleRegistration
         $this->editable = $this->form->getEditableFields();
 
         // Return if there are no editable fields
-        if (!is_array($this->editable) || empty($this->editable)) {
+        if (!\is_array($this->editable) || empty($this->editable)) {
             return '';
         }
 
@@ -77,7 +77,7 @@ class ModuleRegistrationPlus extends ModuleRegistration
         $data['dateAdded'] = $data['tstamp'];
 
         // Set default groups
-        if (!array_key_exists('groups', $data)) {
+        if (!\array_key_exists('groups', $data)) {
             $data['groups'] = $this->reg_groups;
         }
 
@@ -93,9 +93,9 @@ class ModuleRegistrationPlus extends ModuleRegistration
                                                                                                                    || false !== strpos(\Environment::get('request'), '?')) ? '&' : '?').'token='.$data['activation'];
             $arrTokenData['channels'] = '';
 
-            if (in_array('newsletter', System::getContainer()->get('huh.utils.container')->getActiveBundles(), true)) {
+            if (\in_array('newsletter', System::getContainer()->get('huh.utils.container')->getActiveBundles(), true)) {
                 // Make sure newsletter is an array
-                if (!is_array($data['newsletter'])) {
+                if (!\is_array($data['newsletter'])) {
                     if ('' !== $data['newsletter']) {
                         $data['newsletter'] = [$data['newsletter']];
                     } else {
@@ -126,7 +126,7 @@ class ModuleRegistrationPlus extends ModuleRegistration
         }
 
         // Make sure newsletter is an array
-        if (isset($data['newsletter']) && !is_array($data['newsletter'])) {
+        if (isset($data['newsletter']) && !\is_array($data['newsletter'])) {
             $data['newsletter'] = [$data['newsletter']];
         }
 
@@ -161,7 +161,7 @@ class ModuleRegistrationPlus extends ModuleRegistration
         }
 
         // HOOK: send insert ID and user data
-        if (isset($GLOBALS['TL_HOOKS']['createNewUser']) && is_array($GLOBALS['TL_HOOKS']['createNewUser'])) {
+        if (isset($GLOBALS['TL_HOOKS']['createNewUser']) && \is_array($GLOBALS['TL_HOOKS']['createNewUser'])) {
             foreach ($GLOBALS['TL_HOOKS']['createNewUser'] as $callback) {
                 $this->import($callback[0]);
                 $this->{$callback[0]}->{$callback[1]}($objNewUser->id, $data, $this);
