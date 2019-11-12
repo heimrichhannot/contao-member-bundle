@@ -71,7 +71,7 @@ class Member
     {
         $choices = [];
 
-        if (null === ($members = System::getContainer()->get('huh.utils.model')->findModelInstancesBy('tl_member', ['jobTitles IS NOT NULL'], null))) {
+        if (null === ($members = System::getContainer()->get('huh.utils.model')->findModelInstancesBy('tl_member', ['tl_member.jobTitles IS NOT NULL'], null))) {
             return $choices;
         }
 
