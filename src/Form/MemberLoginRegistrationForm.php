@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (c) 2019 Heimrich & Hannot GmbH
+ * Copyright (c) 2020 Heimrich & Hannot GmbH
  *
  * @license LGPL-3.0-or-later
  */
@@ -11,6 +11,7 @@ namespace HeimrichHannot\MemberBundle\Form;
 use Contao\Config;
 use Contao\Controller;
 use Contao\PageModel;
+use Contao\StringUtil;
 use Contao\System;
 use HeimrichHannot\FormHybrid\Form;
 use HeimrichHannot\Haste\Util\FormSubmission;
@@ -35,7 +36,7 @@ class MemberLoginRegistrationForm extends Form
         }
 
         // add password to default palette
-        if (\in_array('password', deserialize($this->objModule->formHybridEditable), true)) {
+        if (\in_array('password', StringUtil::deserialize($this->objModule->formHybridEditable, true), true)) {
             $this->dca['palettes']['default'] = str_replace('login;', 'login,password,password_noConfirm;', $this->dca['palettes']['default']);
         }
 
@@ -250,7 +251,7 @@ class MemberLoginRegistrationForm extends Form
         if (isset($GLOBALS['TL_HOOKS']['createNewUser']) && \is_array($GLOBALS['TL_HOOKS']['createNewUser'])) {
             foreach ($GLOBALS['TL_HOOKS']['createNewUser'] as $callback) {
                 $this->import($callback[0]);
-                $this->{$callback[0]}->{$callback[1]}($objNewUser->id, $arrData, $this);
+                $this->{$callback[0]}->{$callback[1]}($objNewUser->id, $arrData, $this->objModule);
             }
         }
 

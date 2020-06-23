@@ -40,6 +40,11 @@ $dca['palettes']['default'] = str_replace('language', 'language,foreignLanguages
 
 $dca['subpalettes']['addImage'] = 'singleSRC,alt,imageTitle,size,imagemargin,imageUrl,fullsize,caption,floating';
 
+if(TL_MODE == 'FE') {
+    unset($dca['palettes']['__selector__']);
+}
+
+
 $fields = [
     'headline'            => [
         'label'     => &$GLOBALS['TL_LANG']['tl_member']['headline'],

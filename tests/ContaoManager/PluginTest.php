@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (c) 2019 Heimrich & Hannot GmbH
+ * Copyright (c) 2020 Heimrich & Hannot GmbH
  *
  * @license LGPL-3.0-or-later
  */
@@ -58,9 +58,6 @@ class PluginTest extends ContaoTestCase
 
     /**
      * Mocks the plugin loader.
-     *
-     * @param Invocation $expects
-     * @param array      $plugins
      *
      * @return PluginLoader|\PHPUnit_Framework_MockObject_MockObject
      */

@@ -5,8 +5,8 @@
   "license": "LGPL-3.0-or-later",
   "require": {
     "php": "^7.1",
-    "contao/core-bundle": "^4.4",
-    "heimrichhannot/contao-fieldpalette-bundle": "~0.2||~1.0",
+    "contao/core-bundle": "^4.4|^4.9",
+    "heimrichhannot/contao-fieldpalette-bundle": "^0.5",
     "heimrichhannot/contao-list-bundle": "^1.0-beta|^1.0",
     "heimrichhannot/contao-utils-bundle": "^2.0",
     "heimrichhannot/contao-formhybrid": "^3.0",

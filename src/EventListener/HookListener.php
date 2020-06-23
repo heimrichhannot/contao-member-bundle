@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (c) 2019 Heimrich & Hannot GmbH
+ * Copyright (c) 2020 Heimrich & Hannot GmbH
  *
  * @license LGPL-3.0-or-later
  */
@@ -30,11 +30,8 @@ class HookListener
     /**
      * Switch Address with member address based on filter data.
      *
-     * @param                 $result
-     * @param                 $item
-     * @param Module          $moduleList
-     * @param FilterConfig    $filterConfig
-     * @param ListConfigModel $listConfig
+     * @param $result
+     * @param $item
      *
      * @return mixed
      */

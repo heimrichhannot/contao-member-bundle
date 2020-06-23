@@ -14,6 +14,10 @@
  */
 $GLOBALS['TL_LANG']['tl_module']['reg_activate_plus'][0] = '';
 $GLOBALS['TL_LANG']['tl_module']['reg_activate_plus'][1] = '';
+$GLOBALS['TL_LANG']['tl_module']['bypassPasswordConfirm'][0] = 'Passwortbestätigung deaktivieren';
+$GLOBALS['TL_LANG']['tl_module']['bypassPasswordConfirm'][1] = 'Wählen Sie diese Option, wenn beim Login-/Registrierungsformular kein Feld für die Bestätigung des Passworts aufgeführt werden soll.';
+$GLOBALS['TL_LANG']['tl_module']['redirectLogin'][0] = 'Weiterleitung nach Login';
+$GLOBALS['TL_LANG']['tl_module']['redirectLogin'][1] = 'Wählen Sie hier die Seite aus, zu der ein Nutzer bei Login über das Formular weitergeleitet werden soll.';
 
 /**
  * Legends

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (c) 2019 Heimrich & Hannot GmbH
+ * Copyright (c) 2020 Heimrich & Hannot GmbH
  *
  * @license LGPL-3.0-or-later
  */
@@ -26,11 +26,6 @@ class Member
 
     /**
      * Add an URI scheme if not existing to an url.
-     *
-     * @param string        $varValue
-     * @param DataContainer $dc
-     *
-     * @return string
      */
     public function addURIScheme(string $varValue, DataContainer $dc): string
     {
@@ -38,12 +33,7 @@ class Member
     }
 
     /**
-     * @param string        $varValue
-     * @param DataContainer $dc
-     *
      * @throws \Exception
-     *
-     * @return string
      */
     public function generateAlias(string $varValue, DataContainer $dc): string
     {
@@ -62,8 +52,6 @@ class Member
 
     /**
      * Get a list of job title choices.
-     *
-     * @param DataContainer $dc
      *
      * @return array List of job titles
      */
