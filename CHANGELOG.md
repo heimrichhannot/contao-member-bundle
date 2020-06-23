@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.0.0-beta21] - 2020-06-23
+
+- updated deps
+
 ## [1.0.0-beta20] - 2020-06-23
 
 - fixed fields for login-registration
