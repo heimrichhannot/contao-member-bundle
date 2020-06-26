@@ -10,6 +10,7 @@ namespace HeimrichHannot\MemberBundle\Form;
 
 use Contao\Config;
 use Contao\Controller;
+use Contao\Module;
 use Contao\PageModel;
 use Contao\StringUtil;
 use Contao\System;
@@ -20,13 +21,25 @@ use HeimrichHannot\MemberBundle\Model\MemberPlusModel;
 class MemberLoginRegistrationForm extends Form
 {
     protected $strTemplate = 'formhybrid_login_registration_plus';
+    /**
+     * @var Module
+     */
+    private $module;
 
-    public function __construct($objModule, $intId = 0)
+    /**
+     * MemberLoginRegistrationForm constructor.
+     *
+     * @param      $moduleModel
+     * @param int  $intId
+     * @param null $module
+     */
+    public function __construct($moduleModel, $intId = 0, $module = null)
     {
         $this->strPalette = 'default';
         $this->strMethod = FORMHYBRID_METHOD_POST;
+        $this->module = $module;
 
-        parent::__construct($objModule, $intId);
+        parent::__construct($moduleModel, $intId);
     }
 
     public function modifyDC(&$arrDca = null)
@@ -128,7 +141,8 @@ class MemberLoginRegistrationForm extends Form
             }
 
             if ($this->User->login()) {
-                $this->redirect($this->redirectLogin);
+                $pageModel = PageModel::findByPk($this->redirectLogin);
+                $this->redirect($pageModel->getFrontendUrl());
             } else {
                 if ($this->domainCheck || \Validator::isEmail($username)) {
                     if (null === ($username = $this->getValidDomainUsername())) {
@@ -251,7 +265,7 @@ class MemberLoginRegistrationForm extends Form
         if (isset($GLOBALS['TL_HOOKS']['createNewUser']) && \is_array($GLOBALS['TL_HOOKS']['createNewUser'])) {
             foreach ($GLOBALS['TL_HOOKS']['createNewUser'] as $callback) {
                 $this->import($callback[0]);
-                $this->{$callback[0]}->{$callback[1]}($objNewUser->id, $arrData, $this->objModule);
+                $this->{$callback[0]}->{$callback[1]}($objNewUser->id, $arrData, $this->module);
             }
         }
 

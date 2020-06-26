@@ -12,11 +12,13 @@ use Contao\BackendTemplate;
 use Contao\Environment;
 use Contao\FrontendTemplate;
 use Contao\ModuleRegistration;
+use Contao\StringUtil;
 use Contao\System;
 use HeimrichHannot\FormHybrid\FormHelper;
 use HeimrichHannot\FormHybrid\FormSession;
 use HeimrichHannot\MemberBundle\Form\MemberLoginRegistrationForm;
 use HeimrichHannot\MemberBundle\Model\MemberPlusModel;
+use Patchwork\Utf8;
 
 class ModuleLoginRegistration extends ModuleRegistration
 {
@@ -28,11 +30,11 @@ class ModuleLoginRegistration extends ModuleRegistration
     {
         if (System::getContainer()->get('huh.utils.container')->isBackend()) {
             $objTemplate = new BackendTemplate('be_wildcard');
-            $objTemplate->wildcard = '### '.utf8_strtoupper($GLOBALS['TL_LANG']['FMD']['login_registration_plus'][0]).' ###';
+            $objTemplate->wildcard = '### '.Utf8::strtoupper($GLOBALS['TL_LANG']['FMD']['login_registration_plus'][0]).' ###';
             $objTemplate->title = $this->headline;
             $objTemplate->id = $this->id;
             $objTemplate->link = $this->name;
-            $objTemplate->href = 'contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id='.$this->id;
+            $objTemplate->href = 'contao?do=themes&amp;table=tl_module&amp;act=edit&amp;id='.$this->id;
 
             return $objTemplate->parse();
         }
@@ -67,7 +69,7 @@ class ModuleLoginRegistration extends ModuleRegistration
             $this->reload();
         }
 
-        $this->objForm = new MemberLoginRegistrationForm($this->objModel, $intId ?: 0);
+        $this->objForm = new MemberLoginRegistrationForm($this->objModel, $intId ?: 0, $this);
 
         $this->editable = $this->objForm->getEditableFields();
 
@@ -84,14 +86,19 @@ class ModuleLoginRegistration extends ModuleRegistration
         // Show logout form
         if (FE_USER_LOGGED_IN) {
             $this->import('FrontendUser', 'User');
-            $this->strTemplate = ($this->cols > 1) ? 'mod_logout_2cl' : 'mod_logout_1cl';
+            $this->strTemplate = 'mod_login';
+
+            /** @var \Symfony\Component\HttpFoundation\Request $request */
+            $request = System::getContainer()->get('request_stack')->getCurrentRequest();
 
             $this->Template = new FrontendTemplate($this->strTemplate);
             $this->Template->setData($this->arrData);
-
-            $this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['logout']);
-            $this->Template->loggedInAs = sprintf($GLOBALS['TL_LANG']['MSC']['loggedInAs'], $this->User->username);
+            $this->Template->slabel = StringUtil::specialchars($GLOBALS['TL_LANG']['MSC']['logout']);
+            $this->Template->loggedInAs = sprintf($GLOBALS['TL_LANG']['MSC']['loggedInAs'], $request->get('username'));
             $this->Template->action = ampersand(Environment::get('indexFreeRequest'));
+            $this->Template->formId = $this->objForm->getFormId();
+            $this->Template->username = $request->get('username');
+            $this->Template->value = $this->objForm->arrData;
 
             if ($this->User->lastLogin > 0) {
                 global $objPage;
