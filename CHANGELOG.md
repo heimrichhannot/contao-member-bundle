@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.0.0-beta23] - 2020-06-29
+- fixed labels in ModuleLoginRegistration 
+
 ## [1.0.0-beta22] - 2020-06-26
 - fixed login_registration_form
 - fixed login_password_noConfirm template

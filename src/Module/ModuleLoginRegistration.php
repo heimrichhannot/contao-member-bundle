@@ -97,8 +97,9 @@ class ModuleLoginRegistration extends ModuleRegistration
             $this->Template->loggedInAs = sprintf($GLOBALS['TL_LANG']['MSC']['loggedInAs'], $request->get('username'));
             $this->Template->action = ampersand(Environment::get('indexFreeRequest'));
             $this->Template->formId = $this->objForm->getFormId();
-            $this->Template->username = $request->get('username');
-            $this->Template->value = $this->objForm->arrData;
+            $this->Template->value = $request->get('username');
+            $this->Template->username = $GLOBALS['TL_LANG']['MSC']['username'];
+            $this->Template->password = $GLOBALS['TL_LANG']['MSC']['password'][0];
 
             if ($this->User->lastLogin > 0) {
                 global $objPage;
