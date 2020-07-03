@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.0.0-beta24] - 2020-07-03
+- added Event `MemberBeforeLoginRedirectEvent`
+
 ## [1.0.0-beta23] - 2020-06-29
 - fixed labels in ModuleLoginRegistration 
 

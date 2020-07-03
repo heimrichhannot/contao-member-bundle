@@ -16,6 +16,7 @@ use Contao\StringUtil;
 use Contao\System;
 use HeimrichHannot\FormHybrid\Form;
 use HeimrichHannot\Haste\Util\FormSubmission;
+use HeimrichHannot\MemberBundle\Event\MemberBeforeLoginRedirectEvent;
 use HeimrichHannot\MemberBundle\Model\MemberPlusModel;
 
 class MemberLoginRegistrationForm extends Form
@@ -142,7 +143,10 @@ class MemberLoginRegistrationForm extends Form
 
             if ($this->User->login()) {
                 $pageModel = PageModel::findByPk($this->redirectLogin);
-                $this->redirect($pageModel->getFrontendUrl());
+                $url = $pageModel->getFrontendUrl();
+                $event = System::getContainer()->get('event_dispatcher')->dispatch(MemberBeforeLoginRedirectEvent::NAME, new MemberBeforeLoginRedirectEvent($username, $url, $this));
+
+                $this->redirect($event->getRedirectUrl());
             } else {
                 if ($this->domainCheck || \Validator::isEmail($username)) {
                     if (null === ($username = $this->getValidDomainUsername())) {
@@ -154,10 +158,16 @@ class MemberLoginRegistrationForm extends Form
                     System::getContainer()->get('huh.request')->setPost('username', $username);
 
                     if ($this->User->login()) {
-                        $this->redirect($strRedirect);
+                        $event = System::getContainer()->get('event_dispatcher')->dispatch(MemberBeforeLoginRedirectEvent::NAME, new MemberBeforeLoginRedirectEvent($username, $strRedirect, $this));
+                        $this->redirect($event->getRedirectUrl());
                     }
 
-                    $this->registerUser($username);
+                    if (null === ($member = System::getContainer()->get('huh.utils.model')->findOneModelInstanceBy('tl_member', ['username=?', 'login=?', 'activation=?'], [$username, 1, '']))) {
+                        $this->registerUser($username);
+                    }
+
+                    $_SESSION['LOGIN_ERROR'] = $GLOBALS['TL_LANG']['ERR']['invalidLogin'];
+                    $this->reload();
                 }
             }
         }

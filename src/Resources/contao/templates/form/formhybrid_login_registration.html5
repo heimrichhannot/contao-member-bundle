@@ -28,7 +28,6 @@
                                 $objField->label = 'anmelden';
                             }
                             ?>
-                            
                             <?php echo $objField->parse(); ?>
                         <?php endforeach; ?>
                     </div>
