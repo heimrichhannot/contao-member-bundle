@@ -14,8 +14,8 @@ use Symfony\Component\EventDispatcher\Event;
 class MemberBeforeLoginRedirectEvent extends Event
 {
     const NAME = 'huh.member.before_login_redirect';
-    private string $username;
-    private string $redirectUrl;
+    private $username;
+    private $redirectUrl;
     /**
      * @var Form
      */
