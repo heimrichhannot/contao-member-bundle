@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.0.0-beta26] - 2020-07-07
+- fixed template when user is already loged in
+
 ## [1.0.0-beta25] - 2020-07-03
 - fixed Event for lover php versions
 

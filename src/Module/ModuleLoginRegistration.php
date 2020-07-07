@@ -94,10 +94,11 @@ class ModuleLoginRegistration extends ModuleRegistration
             $this->Template = new FrontendTemplate($this->strTemplate);
             $this->Template->setData($this->arrData);
             $this->Template->slabel = StringUtil::specialchars($GLOBALS['TL_LANG']['MSC']['logout']);
-            $this->Template->loggedInAs = sprintf($GLOBALS['TL_LANG']['MSC']['loggedInAs'], $request->get('username'));
+            $this->Template->loggedInAs = sprintf($GLOBALS['TL_LANG']['MSC']['loggedInAs'], $GLOBALS['TL_USERNAME']);
             $this->Template->action = ampersand(Environment::get('indexFreeRequest'));
             $this->Template->formId = $this->objForm->getFormId();
-            $this->Template->value = $request->get('username');
+            $this->Template->logout = true;
+            $this->Template->value = $GLOBALS['TL_USERNAME'];
             $this->Template->username = $GLOBALS['TL_LANG']['MSC']['username'];
             $this->Template->password = $GLOBALS['TL_LANG']['MSC']['password'][0];
 
