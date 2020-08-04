@@ -13,26 +13,29 @@ $dca = &$GLOBALS['TL_DCA']['tl_member'];
 /**
  * Palettes
  */
+if(!class_exists('HeimrichHannot\MemberPlus\MemberPlus')) {
 
-// selector
-$dca['palettes']['__selector__'][] = 'addImage';
+    // selector
+    $dca['palettes']['__selector__'][] = 'addImage';
 
-// title
-$dca['palettes']['default'] = '{title_legend},headline;'.$dca['palettes']['default'];
-// alias - must be invoked after firstname & title, otherwise not available in save_callback
-$dca['palettes']['default'] = str_replace('lastname', 'lastname,alias', $dca['palettes']['default']);
-// titles
-$dca['palettes']['default'] = str_replace('firstname', 'academicTitle,extendedTitle,nobilityTitle,academicDegree,jobTitles,firstname', $dca['palettes']['default']);
-// personal
-$dca['palettes']['default'] = str_replace('gender', 'gender,position', $dca['palettes']['default']);
-// address
-$dca['palettes']['default'] = str_replace('country', 'country,addressText,additionalAddresses', $dca['palettes']['default']);
-$dca['palettes']['default'] = str_replace('street,', 'street,street2,', $dca['palettes']['default']);
-// image
-$dca['palettes']['default'] = str_replace('assignDir', 'assignDir;{image_legend},addImage;', $dca['palettes']['default']);
-// contact
-$dca['palettes']['default'] = str_replace('website', 'website,xingProfile,linkedinProfile,facebookProfile,twitterProfile,googlePlusProfile', $dca['palettes']['default']);
-$dca['palettes']['default'] = str_replace('language', 'language,foreignLanguages', $dca['palettes']['default']);
+    // title
+    $dca['palettes']['default'] = '{title_legend},headline;'.$dca['palettes']['default'];
+    // alias - must be invoked after firstname & title, otherwise not available in save_callback
+    $dca['palettes']['default'] = str_replace('lastname', 'lastname,alias', $dca['palettes']['default']);
+    // titles
+    $dca['palettes']['default'] = str_replace('firstname', 'academicTitle,extendedTitle,nobilityTitle,academicDegree,jobTitles,firstname', $dca['palettes']['default']);
+    // personal
+    $dca['palettes']['default'] = str_replace('gender', 'gender,position', $dca['palettes']['default']);
+    // address
+    $dca['palettes']['default'] = str_replace('country', 'country,addressText,additionalAddresses', $dca['palettes']['default']);
+    $dca['palettes']['default'] = str_replace('street,', 'street,street2,', $dca['palettes']['default']);
+    // image
+    $dca['palettes']['default'] = str_replace('assignDir', 'assignDir;{image_legend},addImage;', $dca['palettes']['default']);
+    // contact
+    $dca['palettes']['default'] = str_replace('website', 'website,xingProfile,linkedinProfile,facebookProfile,twitterProfile,googlePlusProfile', $dca['palettes']['default']);
+    $dca['palettes']['default'] = str_replace('language', 'language,foreignLanguages', $dca['palettes']['default']);
+}
+
 
 /**
  * Subpalettes
