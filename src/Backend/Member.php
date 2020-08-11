@@ -10,6 +10,7 @@ namespace HeimrichHannot\MemberBundle\Backend;
 
 use Contao\CoreBundle\Framework\ContaoFrameworkInterface;
 use Contao\DataContainer;
+use Contao\FrontendUser;
 use Contao\System;
 
 class Member
@@ -33,10 +34,17 @@ class Member
     }
 
     /**
+     * @param mixed                           $value  Value to be saved
+     * @param DataContainer|FrontendUser|null $dc     DataContainer object in backend, front end user instance in frontendmodule Personal data, null in registration frontend module
+     * @param null                            $module
+     *
      * @throws \Exception
      */
-    public function generateAlias(string $varValue, DataContainer $dc): string
+    public function generateAlias($varValue, DataContainer $dc = null): string
     {
+        if (!$dc) {
+            return '';
+        }
         if (null === ($member = System::getContainer()->get('huh.utils.model')->findModelInstanceByPk('tl_member', $dc->id))) {
             return '';
         }
