@@ -42,8 +42,8 @@ class Member
      */
     public function generateAlias($varValue, DataContainer $dc = null): string
     {
-        if (!$dc) {
-            return '';
+        if (!empty($varValue) || !$dc) {
+            return $varValue;
         }
         if (null === ($member = System::getContainer()->get('huh.utils.model')->findModelInstanceByPk('tl_member', $dc->id))) {
             return '';
