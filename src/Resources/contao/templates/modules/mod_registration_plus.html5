@@ -3,9 +3,11 @@
 <?php $this->block('content'); ?>
 
 <?php if ($this->message): ?>
-	<?php echo $this->message; ?>
+	<?= $this->message; ?>
 <?php endif; ?>
 
-<?php echo $this->form; ?>
+<?php if ($this->form): ?>
+	<?= $this->form; ?>
+<?php endif; ?>
 
 <?php $this->endblock(); ?>

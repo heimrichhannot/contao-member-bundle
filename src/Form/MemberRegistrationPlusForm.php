@@ -146,16 +146,24 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
     }
 
     /**
+     * generate activation url from module config.
+     *
      * @return string
      */
     protected function getActivation()
     {
-        $redirect = Environment::get('base');
+        $urlUtil = System::getContainer()->get('huh.utils.url');
 
-        $redirect .= $this->reg_jumpTo ? System::getContainer()->get('huh.utils.url')->getJumpToPageObject($this->reg_jumpTo)->alias : Environment::get('request');
+        if (!$this->reg_jumpTo) {
+            return $urlUtil->getCurrentUrl();
+        }
 
-        $redirect .= ((Config::get('disableAlias') || false !== strpos(Environment::get('request'), '?')) ? '&' : '?').'token='.$this->activeRecord->activation;
+        if (null === ($jumpToPage = $urlUtil->getJumpToPageObject($this->reg_jumpTo))) {
+            return '';
+        }
 
-        return Idna::decode($redirect);
+        $url = $jumpToPage->getAbsoluteUrl();
+
+        return $urlUtil->addQueryString('token='.$this->activeRecord->activation, $url);
     }
 }

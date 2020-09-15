@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.0.0-beta30] - 2020-09-15
+- fixed registration plus module and member activation
+
 ## [1.0.0-beta29] - 2020-08-12
 - don't generate alias if already exist
 

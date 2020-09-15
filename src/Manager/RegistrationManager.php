@@ -10,9 +10,11 @@ namespace HeimrichHannot\MemberBundle\Manager;
 
 use Contao\Controller;
 use Contao\CoreBundle\Framework\ContaoFrameworkInterface;
+use Contao\CoreBundle\Monolog\ContaoContext;
 use Contao\MemberModel;
 use Contao\Model;
 use Contao\System;
+use Psr\Log\LogLevel;
 
 class RegistrationManager
 {
@@ -67,21 +69,20 @@ class RegistrationManager
         // HOOK: post activation callback
         if (isset($GLOBALS['TL_HOOKS']['activateAccount']) && \is_array($GLOBALS['TL_HOOKS']['activateAccount'])) {
             foreach ($GLOBALS['TL_HOOKS']['activateAccount'] as $callback) {
-                System::importStatic($callback[0]);
-                $this->{$callback[0]}->{$callback[1]}($objMember, $this);
+//                $objCallback = System::importStatic($callback[0]);
+//                $return = $objCallback->{$callback[1]}($image, $watermark, $position, $target);
+                $objCallback = System::importStatic($callback[0]);
+                $objCallback->{$callback[1]}($objMember, $this);
             }
         }
 
         // Log activity
-        System::getContainer()->get('monolog.logger.contao')->log('User account ID '.$objMember->id.' ('.$objMember->email.') has been activated', __METHOD__, TL_ACCESS);
+        System::getContainer()->get('monolog.logger.contao')->log(
+            LogLevel::INFO,
+            'User account ID '.$objMember->id.' ('.$objMember->email.') has been activated',
+            ['contao' => new ContaoContext(__METHOD__, LogLevel::INFO)]);
         // Redirect to the jumpTo page
-        if (null !== ($objTarget = $model->getRelated('reg_jumpTo'))) {
-//            $this->redirect($this->generateFrontendUrl($objTarget->row()));
-            $this->framework->getAdapter(Controller::class)->redirect($objTarget->getFrontendUrl());
-        } // redirect to current page without token parameter
-        else {
-            System::getContainer()->get('huh.member.manager.message')->addSuccess($this->accountActivatedMessage);
-            $this->framework->getAdapter(Controller::class)->redirect($strReloadUrl);
-        }
+
+        System::getContainer()->get('huh.member.manager.message')->addSuccess($this->accountActivatedMessage);
     }
 }

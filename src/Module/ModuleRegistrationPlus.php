@@ -198,8 +198,8 @@ class ModuleRegistrationPlus extends ModuleRegistration
         // Activate account
         if (System::getContainer()->get('huh.request')->hasGet('token')) {
             System::getContainer()->get('huh.member.manager.registration')->activateAccount($this->objModel);
+        } else {
+            $this->Template->form = $this->form->generate();
         }
-
-        $this->Template->form = $this->form->generate();
     }
 }
