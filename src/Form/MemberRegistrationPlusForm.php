@@ -12,6 +12,7 @@ use Contao\Config;
 use Contao\Controller;
 use Contao\DataContainer;
 use Contao\Environment;
+use Contao\FrontendUser;
 use Contao\Idna;
 use Contao\MemberModel;
 use Contao\PageModel;
@@ -79,6 +80,11 @@ class MemberRegistrationPlusForm extends \HeimrichHannot\FormHybrid\Form
         }
 
         $objMember = System::getContainer()->get('contao.framework')->getAdapter(MemberModel::class)->findByPk($dc->activeRecord->id);
+
+        if ($objMember->password == System::getContainer()->get('huh.request')->getPost('password')) {
+            $encoder = System::getContainer()->get('security.encoder_factory')->getEncoder(FrontendUser::getInstance());
+            $objMember->password = $encoder->encodePassword($objMember->password, null);
+        }
 
         $objMember->login = $this->objModule->reg_allowLogin;
         $objMember->activation = md5(uniqid(mt_rand(), true));

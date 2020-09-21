@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.0.0-beta31] - 2020-09-21
+- fixed encoding of password in registration plus form
+
 ## [1.0.0-beta30] - 2020-09-15
 - fixed registration plus module and member activation
 
