@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.0-beta33] - 2021-06-18
+
+- fixed missing labels
+
 ## [1.0.0-beta32] - 2021-06-17
 
 - fixed field associations for contao 4.9

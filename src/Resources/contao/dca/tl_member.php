@@ -161,6 +161,7 @@ $fields = [
         'sql' => "char(1) NOT NULL default ''",
     ],
     'singleSRC' => [
+        'label' => &$GLOBALS['TL_LANG']['tl_content']['singleSRC'],
         'exclude' => true,
         'inputType' => 'fileTree',
         'eval' => ['filesOnly' => true, 'fieldType' => 'radio', 'mandatory' => true, 'tl_class' => 'clr'],
@@ -170,6 +171,7 @@ $fields = [
         'sql' => 'binary(16) NULL',
     ],
     'alt' => [
+        'label' => &$GLOBALS['TL_LANG']['tl_content']['alt'],
         'exclude' => true,
         'search' => true,
         'inputType' => 'text',
@@ -177,6 +179,7 @@ $fields = [
         'sql' => "varchar(255) NOT NULL default ''",
     ],
     'imageTitle' => [
+        'label' => &$GLOBALS['TL_LANG']['tl_content']['imageTitle'],
         'exclude' => true,
         'search' => true,
         'inputType' => 'text',
@@ -184,6 +187,7 @@ $fields = [
         'sql' => "varchar(255) NOT NULL default ''",
     ],
     'size' => [
+        'label' => &$GLOBALS['TL_LANG']['tl_content']['size'],
         'exclude' => true,
         'inputType' => 'imageSize',
         'reference' => &$GLOBALS['TL_LANG']['MSC'],
@@ -194,6 +198,7 @@ $fields = [
         'sql' => "varchar(255) NOT NULL default ''",
     ],
     'imagemargin' => [
+        'label' => &$GLOBALS['TL_LANG']['tl_content']['imagemargin'],
         'exclude' => true,
         'inputType' => 'trbl',
         'options' => $GLOBALS['TL_CSS_UNITS'],
@@ -201,6 +206,7 @@ $fields = [
         'sql' => "varchar(128) NOT NULL default ''",
     ],
     'imageUrl' => [
+        'label' => &$GLOBALS['TL_LANG']['tl_content']['imageUrl'],
         'exclude' => true,
         'search' => true,
         'inputType' => 'text',
@@ -208,12 +214,14 @@ $fields = [
         'sql' => "varchar(255) NOT NULL default ''",
     ],
     'fullsize' => [
+        'label' => &$GLOBALS['TL_LANG']['tl_content']['fullsize'],
         'exclude' => true,
         'inputType' => 'checkbox',
         'eval' => ['tl_class' => 'w50 m12'],
         'sql' => "char(1) NOT NULL default ''",
     ],
     'caption' => [
+        'label' => &$GLOBALS['TL_LANG']['tl_content']['caption'],
         'exclude' => true,
         'search' => true,
         'inputType' => 'text',
@@ -221,6 +229,7 @@ $fields = [
         'sql' => "varchar(255) NOT NULL default ''",
     ],
     'floating' => [
+        'label' => &$GLOBALS['TL_LANG']['tl_content']['floating'],
         'exclude' => true,
         'inputType' => 'radioTable',
         'options' => ['above', 'left', 'right', 'below'],
