@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.0] - 2022-05-09
+- Changed: allow php8
+- Changed: allow fieldpalette 0.6
+
 ## [1.0.0-beta33] - 2021-06-18
 
 - fixed missing labels

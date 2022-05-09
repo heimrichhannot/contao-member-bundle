@@ -4,10 +4,10 @@
   "description": "This module offers a additional member functions",
   "license": "LGPL-3.0-or-later",
   "require": {
-    "php": "^7.1",
+    "php": "^7.1 || ^8.0",
     "contao/core-bundle": "^4.4",
-    "heimrichhannot/contao-fieldpalette-bundle": "^0.5",
-    "heimrichhannot/contao-list-bundle": "^1.0-beta|^1.0",
+    "heimrichhannot/contao-fieldpalette-bundle": "^0.5 || ^0.6",
+    "heimrichhannot/contao-list-bundle": "^1.0",
     "heimrichhannot/contao-utils-bundle": "^2.0",
     "heimrichhannot/contao-formhybrid": "^3.0",
     "heimrichhannot/contao-tagsinput": "^2.2"
@@ -24,11 +24,6 @@
     "php-coveralls/php-coveralls": "^2.0",
     "symfony/phpunit-bridge": "^3.2",
     "symfony/form": "~3.4|~4.0"
-  },
-  "minimum-stability": "beta",
-  "conflict": {
-    "contao/core": "*",
-    "contao/manager-plugin": "<2.0 || >=3.0"
   },
   "autoload": {
     "psr-4": {
@@ -48,9 +43,6 @@
     "psr-4": {
       "HeimrichHannot\\MemberBundle\\Test\\": "tests/"
     }
-  },
-  "config": {
-    "preferred-install": "dist"
   },
   "extra": {
     "contao-manager-plugin": "HeimrichHannot\\MemberBundle\\ContaoManager\\Plugin"

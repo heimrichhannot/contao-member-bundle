@@ -3,7 +3,9 @@
 [![](https://img.shields.io/travis/heimrichhannot/contao-member-bundle/master.svg)](https://travis-ci.org/heimrichhannot/contao-member-bundle/)
 [![](https://img.shields.io/coveralls/heimrichhannot/contao-member-bundle/master.svg)](https://coveralls.io/github/heimrichhannot/contao-member-bundle)
 
-# contao-member-bundle
+> This Bundle is deprecated and in maintenance mode only. Please don't use it in new projects anymore.
+
+# Contao Member Bundle
 
 This bundle contains a collection of enhancements for contao frontend members.
 
