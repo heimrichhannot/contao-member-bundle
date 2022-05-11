@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (c) 2020 Heimrich & Hannot GmbH
+ * Copyright (c) 2022 Heimrich & Hannot GmbH
  *
  * @license LGPL-3.0-or-later
  */
@@ -113,7 +113,7 @@ class MemberLoginRegistrationForm extends Form
     {
         $this->onSubmitCallback($this);
 
-        $username = System::getContainer()->get('huh.request')->getPost('username') ? System::getContainer()->get('huh.request')->getPost('username') : System::getContainer()->get('huh.request')->getPost('email');
+        $username = System::getContainer()->get('huh.request')->getPost('username') ?: System::getContainer()->get('huh.request')->getPost('email');
         $this->domainCheck = false;
 
         $this->domainList = $this->getDomainList();
@@ -133,7 +133,7 @@ class MemberLoginRegistrationForm extends Form
             $strRedirect = $this->getJumpTo();
             $this->import('FrontendUser', 'User');
 
-            $_POST['username'] = System::getContainer()->get('huh.request')->getPost('username') ? System::getContainer()->get('huh.request')->getPost('username') : System::getContainer()->get('huh.request')->getPost('email');
+            $_POST['username'] = System::getContainer()->get('huh.request')->getPost('username') ?: System::getContainer()->get('huh.request')->getPost('email');
 
             // Auto login is not allowed
             if (isset($_POST['autologin']) && !$this->autologin) {
@@ -144,7 +144,10 @@ class MemberLoginRegistrationForm extends Form
             if ($this->User->login()) {
                 $pageModel = PageModel::findByPk($this->redirectLogin);
                 $url = $pageModel->getFrontendUrl();
-                $event = System::getContainer()->get('event_dispatcher')->dispatch(MemberBeforeLoginRedirectEvent::NAME, new MemberBeforeLoginRedirectEvent($username, $url, $this));
+                $event = System::getContainer()->get('event_dispatcher')->dispatch(
+                    new MemberBeforeLoginRedirectEvent($username, $url, $this),
+                    MemberBeforeLoginRedirectEvent::NAME
+                );
 
                 $this->redirect($event->getRedirectUrl());
             } else {
@@ -158,7 +161,10 @@ class MemberLoginRegistrationForm extends Form
                     System::getContainer()->get('huh.request')->setPost('username', $username);
 
                     if ($this->User->login()) {
-                        $event = System::getContainer()->get('event_dispatcher')->dispatch(MemberBeforeLoginRedirectEvent::NAME, new MemberBeforeLoginRedirectEvent($username, $strRedirect, $this));
+                        $event = System::getContainer()->get('event_dispatcher')->dispatch(
+                            new MemberBeforeLoginRedirectEvent($username, $strRedirect, $this),
+                            MemberBeforeLoginRedirectEvent::NAME
+                        );
                         $this->redirect($event->getRedirectUrl());
                     }
 
@@ -369,7 +375,7 @@ class MemberLoginRegistrationForm extends Form
     {
         $arrDomainList = $this->getDomainList();
 
-        $username = System::getContainer()->get('huh.request')->getPost('username') ? System::getContainer()->get('huh.request')->getPost('username') : System::getContainer()->get('huh.request')->getPost('email');
+        $username = System::getContainer()->get('huh.request')->getPost('username') ?: System::getContainer()->get('huh.request')->getPost('email');
         $domain = System::getContainer()->get('huh.request')->getPost('domain');
 
         if (!empty($arrDomainList)) {

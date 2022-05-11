@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (c) 2020 Heimrich & Hannot GmbH
+ * Copyright (c) 2022 Heimrich & Hannot GmbH
  *
  * @license LGPL-3.0-or-later
  */
@@ -18,7 +18,6 @@ use HeimrichHannot\FormHybrid\FormHelper;
 use HeimrichHannot\FormHybrid\FormSession;
 use HeimrichHannot\MemberBundle\Form\MemberLoginRegistrationForm;
 use HeimrichHannot\MemberBundle\Model\MemberPlusModel;
-use Patchwork\Utf8;
 
 class ModuleLoginRegistration extends ModuleRegistration
 {
@@ -30,7 +29,7 @@ class ModuleLoginRegistration extends ModuleRegistration
     {
         if (System::getContainer()->get('huh.utils.container')->isBackend()) {
             $objTemplate = new BackendTemplate('be_wildcard');
-            $objTemplate->wildcard = '### '.Utf8::strtoupper($GLOBALS['TL_LANG']['FMD']['login_registration_plus'][0]).' ###';
+            $objTemplate->wildcard = '### '.$GLOBALS['TL_LANG']['FMD']['login_registration_plus'][0].' ###';
             $objTemplate->title = $this->headline;
             $objTemplate->id = $this->id;
             $objTemplate->link = $this->name;

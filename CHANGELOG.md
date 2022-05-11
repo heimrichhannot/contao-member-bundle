@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0] - 2022-05-11
+- Changed: minumum contao version is now 4.9
+- Fixed: symfony 5 compatibility
+
 ## [1.0.0] - 2022-05-09
 - Changed: allow php8
 - Changed: allow fieldpalette 0.6

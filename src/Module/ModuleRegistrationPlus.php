@@ -1,13 +1,14 @@
 <?php
 
 /*
- * Copyright (c) 2020 Heimrich & Hannot GmbH
+ * Copyright (c) 2022 Heimrich & Hannot GmbH
  *
  * @license LGPL-3.0-or-later
  */
 
 namespace HeimrichHannot\MemberBundle\Module;
 
+use Contao\BackendTemplate;
 use Contao\Email;
 use Contao\FilesModel;
 use Contao\Folder;
@@ -21,7 +22,6 @@ use Contao\Versions;
 use HeimrichHannot\FormHybrid\FormHelper;
 use HeimrichHannot\FormHybrid\FormSession;
 use HeimrichHannot\MemberBundle\Form\MemberRegistrationPlusForm;
-use Patchwork\Utf8;
 
 class ModuleRegistrationPlus extends ModuleRegistration
 {
@@ -35,8 +35,8 @@ class ModuleRegistrationPlus extends ModuleRegistration
     public function generate()
     {
         if (System::getContainer()->get('huh.utils.container')->isBackend()) {
-            $objTemplate = new \BackendTemplate('be_wildcard');
-            $objTemplate->wildcard = '### '.Utf8::strtoupper($GLOBALS['TL_LANG']['FMD']['registration_plus'][0]).' ###';
+            $objTemplate = new BackendTemplate('be_wildcard');
+            $objTemplate->wildcard = '### '.$GLOBALS['TL_LANG']['FMD']['registration_plus'][0].' ###';
             $objTemplate->title = $this->headline;
             $objTemplate->id = $this->id;
             $objTemplate->link = $this->name;
