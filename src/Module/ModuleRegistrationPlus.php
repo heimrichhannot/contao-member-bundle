@@ -52,7 +52,7 @@ class ModuleRegistrationPlus extends ModuleRegistration
             $intId = System::getContainer()->get('contao.framework')->getAdapter(FormSession::class)->getSubmissionId($strFormId);
         }
 
-        $this->form = new MemberRegistrationPlusForm($this->objModel, $intId ?: 0);
+        $this->form = new MemberRegistrationPlusForm($this->objModel, $intId ??  0);
 
         $this->editable = $this->form->getEditableFields();
 
