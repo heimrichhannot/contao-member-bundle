@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0] - 2024-12-11
+- Changed: imageUrl sql type to TEXT
+- Fixed: php8 warning
+
 ## [1.1.0] - 2022-05-11
 - Changed: minumum contao version is now 4.9
 - Fixed: symfony 5 compatibility

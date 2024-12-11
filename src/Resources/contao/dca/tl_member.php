@@ -210,8 +210,8 @@ $fields = [
         'exclude' => true,
         'search' => true,
         'inputType' => 'text',
-        'eval' => ['rgxp' => 'url', 'decodeEntities' => true, 'maxlength' => 255, 'dcaPicker' => true, 'addWizardClass' => false, 'tl_class' => 'w50'],
-        'sql' => "varchar(255) NOT NULL default ''",
+        'eval' => ['rgxp' => 'url', 'decodeEntities' => true, 'dcaPicker' => true, 'addWizardClass' => false, 'tl_class' => 'w50'],
+        'sql' => "TEXT NULL",
     ],
     'fullsize' => [
         'label' => &$GLOBALS['TL_LANG']['tl_content']['fullsize'],

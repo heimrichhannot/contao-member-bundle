@@ -25,8 +25,9 @@ $GLOBALS['TL_MODELS']['tl_member']         = '\HeimrichHannot\MemberBundle\Model
 /**
  * Constants
  */
-define('MEMBER_ACTIVATION_ACTIVATED_FIELD_PREFIX', 'ACTIVATED:');
-
+if (!defined('MEMBER_ACTIVATION_ACTIVATED_FIELD_PREFIX')) {
+    define('MEMBER_ACTIVATION_ACTIVATED_FIELD_PREFIX', 'ACTIVATED:');
+}
 /**
  * Front end form fields
  */
