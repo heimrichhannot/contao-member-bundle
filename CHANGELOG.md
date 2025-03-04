@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.1] - 2025-03-04
+- Changed: allow fieldpalette 0.7
+
 ## [1.2.0] - 2024-12-11
 - Changed: imageUrl sql type to TEXT
 - Fixed: php8 warning
